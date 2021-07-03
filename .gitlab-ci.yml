@@ -18,9 +18,9 @@ stages:
 
 build:
   stage: build
-  environment: dev
-  only:
-    - dev
+  # environment: dev
+  # only:
+  #   - dev
   tags:
     - docker
   script:
@@ -32,9 +32,9 @@ build:
 
 deploy:
   stage: deploy
-  environment: dev
-  only:
-    - dev
+  # environment: dev
+  # only:
+  #   - dev
   tags:
     - docker
   dependencies:
