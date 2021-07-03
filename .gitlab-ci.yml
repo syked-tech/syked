@@ -1,7 +1,7 @@
 variables:
   S3_BUCKET_DEV: "dev-syked-xyz"
-  # S3_BUCKET_TEST: ""
-  # S3_BUCKET_PROD: ""
+  S3_BUCKET_TEST: ""
+  S3_BUCKET_PROD: ""
 
 image: node:latest
 before_script:
