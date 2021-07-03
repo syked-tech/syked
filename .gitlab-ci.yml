@@ -1,0 +1,46 @@
+variables:
+  S3_BUCKET_DEV: "dev-syked-xyz"
+  # S3_BUCKET_TEST: ""
+  # S3_BUCKET_PROD: ""
+
+image: node:latest
+before_script:
+  - chmod +x ./CI/before_script.sh
+  - ./CI/before_script.sh
+
+cache:
+  key: syked
+  paths:
+    - node_modules/
+    - .yarn/
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  environment: dev
+  only:
+    - dev
+  tags:
+    - docker
+  script:
+    - chmod +x ./CI/build.sh
+    - ./CI/build.sh
+  artifacts:
+    paths:
+      - build/
+
+deploy:
+  stage: deploy
+  environment: dev
+  only:
+    - dev
+  tags:
+    - docker
+  dependencies:
+    - build
+  script:
+    - chmod +x ./CI/deploy.sh
+    - ./CI/deploy.sh
