@@ -296,7 +296,7 @@ export default function Professionals() {
           <Grid item xs={12}>
             <div className="heading">
               <h2>Our Professionals</h2>
-              <p className="mb-0">
+              <p>
                 Dial in to one of our accredited professionals, all in the comfort of your own home.
                 All our therapists work on the strict client Dr Privacy policy. Our therapists are
                 trained professionals who can help you with depression, stress and anxiety.

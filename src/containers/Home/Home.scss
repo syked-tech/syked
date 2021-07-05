@@ -1,7 +1,4 @@
-$ipad: 			1080px;
-$min-tab: 		767px;
-$mob:			575px;
-$white:    		#ffffff;
+@import "common/_variables";
 
 .banner_section {
   min-height: 480px;
