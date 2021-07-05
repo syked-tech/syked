@@ -1,6 +1,8 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import './Footer.scss';
 
 export default function Footer() {
@@ -64,25 +66,25 @@ export default function Footer() {
               <li>
                 <a href="tel:0647299214">064 729 9214</a>
               </li>
-              <li>
+              {/* <li>
                 <a href="mailto:info@syked.co.za">info@syked.co.za</a>
-              </li>
+              </li> */}
             </ul>
             <div className="social">
               <ul>
                 <li>
                   <a href="https://www.facebook.com/sykedza" target="_blank">
-                    <i className="fa fa-facebook" />
+                    <FontAwesomeIcon icon={faFacebookF} />
                   </a>
                 </li>
                 <li>
                   <a href="https://twitter.com/sykedza" target="_blank">
-                    <i className="fa fa-twitter" />
+                    <FontAwesomeIcon icon={faTwitter} />
                   </a>
                 </li>
                 <li>
                   <a href="https://www.instagram.com/syked_za" target="_blank">
-                    <i className="fa fa-twitter" />
+                    <FontAwesomeIcon icon={faInstagram} />
                   </a>
                 </li>
               </ul>
