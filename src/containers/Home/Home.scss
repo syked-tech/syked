@@ -1,0 +1,119 @@
+$ipad: 			1080px;
+$min-tab: 		767px;
+$mob:			575px;
+$white:    		#ffffff;
+
+.banner_section {
+  min-height: 480px;
+  position: relative;
+  display: flex;
+  height: 70vh;
+  overflow: hidden;
+  cursor: grab;
+
+  img {
+    width: auto;
+    margin: 0 0 0 auto;
+    max-width: 100%;
+    object-fit: cover;
+    display: block;
+    height: 70vh;
+  }
+
+  .banner {
+    padding: 0 0 0 100px;
+    color: #ffffff;
+    width: 50%;
+    height: 100%;
+    background: #eae9e9;
+    display: flex;
+    align-items: center;
+    position: absolute;
+
+    @media screen and (max-width:1400px) {
+      max-width: 390px;
+      width: 100%;
+    }
+
+    @media screen and (max-width:$ipad) {
+      padding: 0 0 0 35px
+    }
+
+    @media screen and (max-width:$min-tab) {
+      background: transparent;
+      max-width: 100%;
+      padding: 0;
+    }
+
+    @media screen and (max-width:$mob) {
+      padding: 0 15px 80px;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      width: 280px;
+      height: 200%;
+      background: #eae9e9;
+      right: -168px;
+      transform: rotate(20deg);
+      z-index: 1;
+      color: #323232;
+
+      @media screen and (max-width:$ipad) {
+        transform: rotate(10deg);
+      }
+
+      @media screen and (max-width:$min-tab) {
+        display: none;
+      }
+
+    }
+
+    .home_content {
+      position: relative;
+      z-index: 5;
+      margin-right: -140px;
+      max-width: 500px;
+      left: 30%;
+
+      @media screen and (max-width:1400px) {
+        left: 0;
+      }
+
+      @media screen and (max-width:$min-tab) {
+        margin-right: 0px;
+        background: rgba(#ffffff, 0.8);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin: 0 0 25px;
+        color: #323232;
+        font-family: 'Roboto Slab';
+
+        @media screen and (max-width:$min-tab) {
+          font-size: 18px;
+          margin: 0 0 10px;
+        }
+
+      }
+
+      p {
+        color: #323232;
+        margin: 0 0 30px;
+
+        @media screen and (max-width:$mob) {
+          margin-bottom: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+}

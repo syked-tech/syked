@@ -1,0 +1,100 @@
+$black-32:    	#323232 !default;
+$gray-li:  		#eae9e9 !default;
+$black:    		#000000 !default;
+$green-li:      #adbe4a !default;
+$green-hv:      #8e9a46 !default;
+$gray:          #cccccc !default;
+$singup:        #a8a8aa !default;
+$w-f7:        	#f7f7f7 !default;
+$w-f5:        	#f5f5f5 !default;
+$desktop-main:  1366px;
+$laptop:   		1199px;
+$ipad: 			1080px;
+$tab:      		991px;
+$min-tab: 		767px;
+$mob:			575px;
+
+
+$blue:     		#7ac8cf !default;
+$indigo:   		#ffc633 !default;
+$purple:   		#6f42c1 !default;
+$pink:     		#e83e8c !default;
+$red:      		#ff2832 !default;
+$orange:   		#286e91 !default;
+$yellow:   		#ffbf25 !default;
+$green:    		#bac866 !default;
+$teal:     		#20c997 !default;
+$cyan:     		#17a2b8 !default;
+$white:    		#ffffff !default;
+$facebook:      #3b5998 !default;
+
+$colors:() !default;
+
+$colors: map-merge((
+
+"blue":			$blue,
+"indigo":		$indigo,
+"purple":		$purple,
+"pink":			$pink,
+"red":			$red,
+"orange":		$orange,
+"yellow":		$yellow,
+"green":		$green,
+"teal":			$teal,
+"cyan":			$cyan,
+"white":		$white,
+
+),
+
+$colors
+);
+
+$primary: 		$blue !default;
+$secondary: 	$indigo !default;
+$success: 		$green !default;
+$info: 			$cyan !default;
+$warning: 		$yellow !default;
+$orange: 		$orange !default;
+$danger: 		$red !default;
+$white:			$white !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: 	map-merge((
+
+"primary":		$primary,
+"white":		$white,
+"secondary":	$secondary,
+"success":		$success,
+"info":			$info,
+"warning":		$warning,
+"orange":		$orange,
+"danger":		$danger
+),
+
+$theme-colors
+);
+
+
+$font-bd: 		'Avenir black';
+$font-bk: 		'Avenir book';
+$font-rg: 		'Avenir roman';
+$font-lt: 		'Avenir light';
+$font-md:     	'Avenir medium';
+
+$font-rb-bd: 	'Roboto bold';
+$font-rb-rg: 	'Roboto regular';
+$font-rb-lt: 	'Roboto light';
+$font-rb-sb:    'Roboto thin';
+
+
+$home_banner:   url('assets/images/banner.jpg');
+$home_bottom: 	url('assets/images/bottom_space.png');
+$footer_bg:     url('assets/images/footer_banner.png');
+$dot_bg:        url('assets/images/dot_bg.png');
+$vecter_bg:		url('assets/images/vecror_banner.jpg');
+$arrow_bg:		url('assets/images/arrow.png');
+$booking_bg:    url('assets/images/booking_bg.jpg');
+$con-icon:		url('assets/images/confir_icon.png');
+$happy_bg: 		url('assets/images/be_happy_bg.jpg');
+//$normal_ios    	url('assets/images/btn_google_light_normal_ios.svg');

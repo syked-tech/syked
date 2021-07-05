@@ -1,13 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const prettierOptions = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'),
-);
+const prettierOptions = JSON.parse(fs.readFileSync(path.resolve(__dirname, '.prettierrc'), 'utf8'));
 
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['airbnb', 'prettier', 'prettier/react'],
+  extends: ['airbnb', 'prettier'],
   plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y'],
   env: {
     jest: true,
@@ -20,6 +18,14 @@ module.exports = {
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
+    },
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['src'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
     },
   },
   rules: {
@@ -75,13 +81,5 @@ module.exports = {
     'redux-saga/no-yield-in-race': 2,
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
-  },
-  settings: {
-    'import/resolver': {
-      'node': {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      }
-    }
   },
 };
