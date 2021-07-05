@@ -5,6 +5,7 @@ import { tns } from 'tiny-slider/src/tiny-slider';
 import './Home.scss';
 import Professionals from 'containers/Professionals';
 import HowItWorks from 'containers/HowItWorks';
+import Testimonials from 'containers/Testimonials';
 
 export default function Home() {
   useEffect(() => {
@@ -71,6 +72,7 @@ export default function Home() {
       </section>
       <Professionals />
       <HowItWorks />
+      <Testimonials />
       <Footer />
     </div>
   );
