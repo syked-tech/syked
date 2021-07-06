@@ -265,7 +265,6 @@ export default function Professionals() {
       controls: false,
       nav: true,
       dots: true,
-      // navContainer: '#customize-thumbnails',
       navPosition: 'bottom',
       autoplayButtonOutput: false,
       autoplayText: false,

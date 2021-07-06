@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 import Footer from 'components/Footer';
+// import Professionals from 'containers/Professionals';
+import HowItWorks from 'containers/HowItWorks';
+import Testimonials from 'containers/Testimonials';
 import 'tiny-slider/dist/tiny-slider.css';
 import { tns } from 'tiny-slider/src/tiny-slider';
 import './Home.scss';
-import Professionals from 'containers/Professionals';
-import HowItWorks from 'containers/HowItWorks';
-import Testimonials from 'containers/Testimonials';
 
 export default function Home() {
   useEffect(() => {
@@ -69,8 +71,52 @@ export default function Home() {
             <img src="assets/img/banner_3.png" alt="Banner" />
           </div>
         </div>
+
+        <Container className="service_section">
+          <Grid container justify="center">
+            <Grid item xs={12} sm={6} md={3}>
+              <div className="green_three user">
+                <div>
+                  <img src="assets/img/teens.png" alt="Teens" />
+                </div>
+                <div>
+                  <h2>Students</h2>
+                  <button type="button" className="btn bg-white">
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <div className="green_one user">
+                <div>
+                  <img src="assets/img/individuals.png" alt="Individual" />
+                </div>
+                <div>
+                  <h2>Employee</h2>
+                  <button type="button" className="btn bg-white">
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <div className="green_three user">
+                <div>
+                  <img src="assets/img/gernal-public.png" alt="Public" />
+                </div>
+                <div>
+                  <h2>General Public</h2>
+                  <button type="button" className="btn bg-white">
+                    Book Now
+                  </button>
+                </div>
+              </div>
+            </Grid>
+          </Grid>
+        </Container>
       </section>
-      <Professionals />
+      {/* <Professionals /> */}
       <HowItWorks />
       <Testimonials />
       <Footer />
