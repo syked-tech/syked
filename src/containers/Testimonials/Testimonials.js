@@ -71,7 +71,6 @@ export default function Testimonials() {
       container: '.review_slider',
       swipeAngle: false,
       center: true,
-      // autoHeight: true,
       loop: true,
       autoplay: true,
       autoplayTimeout: 8000,
@@ -140,12 +139,12 @@ export default function Testimonials() {
             </Grid>
           </Grid>
           <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} md={6}>
               <div className="video videoHome">
                 <img src="assets/img/video_banner.png" alt="" />
               </div>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} md={6}>
               <div className="border-div">
                 <div className="review_slider">
                   {reviews.map((item) => (

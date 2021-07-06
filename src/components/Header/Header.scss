@@ -1,0 +1,232 @@
+@import "~bootstrap/scss/bootstrap";
+@import "common/_variables";
+
+.main_header {
+	.navbar {
+		z-index: 9;
+		padding: 0 0;
+		transition: all 400ms ease-in-out;
+
+		&.inner-header {
+			top: 0 !important;
+			box-shadow: 0 2px 4px rgba($black, 0.2);
+			background: $white;
+
+			&.navbar_class {
+				top: 0;
+				background: #bac866;
+			}
+
+			.container {
+				background: transparent;
+				border-radius: 0;
+				padding: 0;
+				box-shadow: none;
+				transition: all 400ms ease-in-out;
+
+				@media screen and (max-width:$tab) {
+					max-width: 100%;
+					padding: 0 15px;
+				}
+
+			}
+
+		}
+
+		&.navbar_class {
+			top: 0;
+			background: #bac866;
+			box-shadow: 0 4px 8px rgba($black, 0.10);
+
+			.navbar-brand {
+				.no_scroll {
+					display: none;
+				}
+
+				.on_scroll {
+					display: block;
+				}
+
+			}
+
+			.container {
+				background: transparent;
+				padding: 0;
+				border-radius: 0;
+				box-shadow: none;
+				transition: all 400ms ease-in-out;
+
+				@media screen and (max-width:$tab) {
+					max-width: 100%;
+					padding: 0 15px;
+				}
+
+				li {
+					a {
+						text-decoration: none;
+						color: $white;
+
+						// &:hover {
+						// 	color: $black-32 !important;
+						// }
+
+						&.active {
+							color: $black-32 !important;
+							background: $white;
+							border-radius: 0px;
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+		.container {
+			background: $white;
+			border-radius: 5px;
+			box-shadow: 0 2px 20px rgba(0, 0, 0, 0.10);
+			transition: all 400ms ease-in-out;
+			padding: 0;
+			overflow: hidden;
+
+			@media screen and (max-width:$tab) {
+				max-width: 100%;
+				padding: 0 15px;
+				border-radius: 0;
+			}
+
+		}
+
+		.navbar-header {
+			@media screen and (max-width:$tab) {
+				width: 100%;
+				padding: 0 0;
+			}
+
+			button.navbar-toggler {
+				background: #bac866;
+				width: 45px;
+				height: 35px;
+				padding: 5px;
+
+				span {
+					height: 3px;
+					margin: 3px 0 4px 0;
+					background: $white;
+					display: block;
+					border-radius: 3px;
+					width: 100%;
+				}
+
+			}
+
+		}
+
+		.navbar-brand {
+			padding: 0 0 0 10px;
+
+			@media screen and (max-width:$tab) {
+				padding: 8px 0;
+			}
+
+			.on_scroll {
+				display: none;
+			}
+
+			img {
+				max-width: 120px;
+				width: 100%;
+			}
+
+			h1 {
+				color: $black-32;
+				margin: 0;
+				font-size: 30px;
+				font-family: $font-bd;
+			}
+
+		}
+
+		ul.navbar-nav  {
+
+			@media screen and (max-width: $tab) {
+			    margin-top: 15px;
+				display: block !important;
+			}
+
+			li {
+				a {
+					text-decoration: none;
+          font-weight: 400;
+          font-family: 'Avenir medium';
+          color: $black-32;
+
+					&.nav-link {
+						padding: 23px 15px !important;
+
+					    cursor: pointer;
+
+						@media screen and (max-width:$tab) {
+						    padding: 10px 15px !important;
+    						margin: 0 -15px;
+						}
+						@media screen and (max-width:$mob){
+							padding: 10px 15px !important;
+						}
+
+            &:hover {
+              color: #bac866;
+            }
+
+						&.active {
+							color: $white !important;
+							background: #bac866;
+							border-radius: 0px;
+						}
+
+					}
+          &.nav-link.alt-nav-link {
+            &:hover {
+              color: $black-32;
+            }
+          }
+
+					.flag {
+						width: 35px;
+						border-radius: 4px;
+						overflow: hidden;
+
+						img {
+							width: 100%;
+						}
+
+					}
+
+				}
+
+				a.flag_menu {
+					padding: 10px 10px;
+
+					.flag {
+						width: 25px !important;
+						height: 25px;
+						margin-right: 10px;
+
+						img {
+							height: 100%;
+						}
+
+					}
+
+				}
+
+			}
+
+		}
+
+	}
+
+}

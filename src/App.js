@@ -13,6 +13,7 @@ import {
 } from 'containers/Auth/authSlice';
 import Notifier from 'components/Notifier';
 import Routes from './Routes';
+import './App.css';
 
 function App({ userHasAuthenticated }) {
   const isAuthenticated = useSelector(selectIsAuthenticated);

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Header from 'components/Header';
 import Footer from 'components/Footer';
-// import Professionals from 'containers/Professionals';
+import Professionals from 'containers/Professionals';
 import HowItWorks from 'containers/HowItWorks';
 import Testimonials from 'containers/Testimonials';
 import 'tiny-slider/dist/tiny-slider.css';
@@ -28,7 +29,8 @@ export default function Home() {
   }, [tns]);
 
   return (
-    <div>
+    <>
+      <Header />
       <section>
         <div className="slider">
           <div className="banner_section">
@@ -116,10 +118,10 @@ export default function Home() {
           </Grid>
         </Container>
       </section>
-      {/* <Professionals /> */}
+      <Professionals />
       <HowItWorks />
       <Testimonials />
       <Footer />
-    </div>
+    </>
   );
 }

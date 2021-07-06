@@ -1,0 +1,60 @@
+@font-face {
+  font-family: 'Avenir medium';
+  src: url('./common/fonts/AvenirLTStd-Medium.eot');
+  src: url('./common/fonts/AvenirLTStd-Medium.eot?#iefix') format('embedded-opentype'),
+      url('./common/fonts/AvenirLTStd-Medium.woff2') format('woff2'),
+      url('./common/fonts/AvenirLTStd-Medium.woff') format('woff'),
+      url('./common/fonts/AvenirLTStd-Medium.ttf') format('truetype'),
+      url('./common/fonts/AvenirLTStd-Medium.svg#AvenirLTStd-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir roman';
+  src: url('./common/fonts/AvenirLTStd-Roman.eot');
+  src: url('./common/fonts/AvenirLTStd-Roman.eot?#iefix') format('embedded-opentype'),
+      url('./common/fonts/AvenirLTStd-Roman.woff2') format('woff2'),
+      url('./common/fonts/AvenirLTStd-Roman.woff') format('woff'),
+      url('./common/fonts/AvenirLTStd-Roman.ttf') format('truetype'),
+      url('./common/fonts/AvenirLTStd-Roman.svg#AvenirLTStd-Roman') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir book';
+  src: url('./common/fonts/AvenirLTStd-Book.eot');
+  src: url('./common/fonts/AvenirLTStd-Book.eot?#iefix') format('embedded-opentype'),
+      url('./common/fonts/AvenirLTStd-Book.woff2') format('woff2'),
+      url('./common/fonts/AvenirLTStd-Book.woff') format('woff'),
+      url('./common/fonts/AvenirLTStd-Book.ttf') format('truetype'),
+      url('./common/fonts/AvenirLTStd-Book.svg#AvenirLTStd-Book') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir light';
+  src: url('./common/fonts/AvenirLTStd-Light.eot');
+  src: url('./common/fonts/AvenirLTStd-Light.eot?#iefix') format('embedded-opentype'),
+      url('./common/fonts/AvenirLTStd-Light.woff2') format('woff2'),
+      url('./common/fonts/AvenirLTStd-Light.woff') format('woff'),
+      url('./common/fonts/AvenirLTStd-Light.ttf') format('truetype'),
+      url('./common/fonts/AvenirLTStd-Light.svg#AvenirLTStd-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir black';
+  src: url('./common/fonts/AvenirLTStd-Black.eot');
+  src: url('./common/fonts/AvenirLTStd-Black.eot?#iefix') format('embedded-opentype'),
+      url('./common/fonts/AvenirLTStd-Black.woff2') format('woff2'),
+      url('./common/fonts/AvenirLTStd-Black.woff') format('woff'),
+      url('./common/fonts/AvenirLTStd-Black.ttf') format('truetype'),
+      url('./common/fonts/AvenirLTStd-Black.svg#AvenirLTStd-Black') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
