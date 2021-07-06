@@ -3,6 +3,9 @@ import { withStyles } from '@material-ui/core';
 
 const styles = () => ({
   '@global': {
+    html: {
+      scrollBehavior: 'smooth',
+    },
     body: {
       fontFamily: `'Avenir roman', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
       Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif`,

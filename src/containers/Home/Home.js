@@ -31,7 +31,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <section>
+      <section id="home-section">
         <div className="slider">
           <div className="banner_section">
             <div className="banner">
@@ -118,8 +118,11 @@ export default function Home() {
           </Grid>
         </Container>
       </section>
+      <div className="anchorPoint" id="professionals-section" />
       <Professionals />
+      <div className="anchorPoint" id="how-it-works-setion" />
       <HowItWorks />
+      <div className="anchorPoint" id="testimonials-section" />
       <Testimonials />
       <Footer />
     </>

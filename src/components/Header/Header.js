@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import { NavLink } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -8,6 +9,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import * as ROUTES from 'common/constants';
 import './Header.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +48,14 @@ export default function Header() {
   const matches = useMediaQuery(theme.breakpoints.down('sm'));
   const isMobile = trigger || matches;
 
+  const handleClick = (event) => {
+    const anchor = (event.target.ownerDocument || document).querySelector('#home-section');
+
+    if (anchor) {
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
+
   return (
     <div className={classes.root}>
       <Container maxWidth="lg">
@@ -62,7 +72,7 @@ export default function Header() {
                 <Navbar collapseOnSelect expand="lg">
                   <>
                     <div className="navbar-header d-flex align-items-center justify-content-between">
-                      <Navbar.Brand className="p-0" href="#0">
+                      <NavLink className="p-0 navbar-brand" to={ROUTES.ROOT} onClick={handleClick}>
                         {trigger ? (
                           <img
                             className={classes.navbarBrandLogo}
@@ -76,7 +86,7 @@ export default function Header() {
                             alt="Logo"
                           />
                         )}
-                      </Navbar.Brand>
+                      </NavLink>
                       <Navbar.Toggle aria-controls="responsive-navbar-nav">
                         <span className="icon-menu"></span>
                         <span className="icon-menu"></span>
@@ -85,22 +95,26 @@ export default function Header() {
                     </div>
                     <Navbar.Collapse id="responsive-navbar-nav">
                       <ul className="navbar-nav mr-auto w-100 align-items-center justify-content-end">
-                        <li className="nav-item active">
-                          <Nav.Link className="nav-link active" href="#0">
+                        <li className="nav-item">
+                          <NavLink
+                            exact
+                            onClick={handleClick}
+                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                            to={`${ROUTES.ROOT}#home-section`}>
                             Home
-                          </Nav.Link>
+                          </NavLink>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
                             className={`${trigger ? 'alt-nav-link' : null} nav-link`}
-                            href="#0">
+                            href="#professionals-section">
                             Our Professionals
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
                             className={`${trigger ? 'alt-nav-link' : null} nav-link`}
-                            href="#0">
+                            href="#how-it-works-setion">
                             How it Works
                           </Nav.Link>
                         </li>
@@ -114,23 +128,26 @@ export default function Header() {
                         <li className="nav-item">
                           <Nav.Link
                             className={`${trigger ? 'alt-nav-link' : null} nav-link`}
-                            href="#0">
+                            href="#testimonials-section">
                             Testimonials
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
-                          <Nav.Link
+                          <NavLink
+                            exact
+                            onClick={handleClick}
                             className={`${trigger ? 'alt-nav-link' : null} nav-link`}
-                            href="#0">
+                            to={ROUTES.LOGIN_PAGE}>
                             Sign up / Login
-                          </Nav.Link>
+                          </NavLink>
                         </li>
                         <li className="nav-item">
-                          <Nav.Link
+                          <NavLink
                             className={`${trigger ? 'alt-nav-link' : null} nav-link`}
-                            href="#0">
+                            activeClassName="active"
+                            to={ROUTES.CONTACT_PAGE}>
                             Contact Us
-                          </Nav.Link>
+                          </NavLink>
                         </li>
                       </ul>
                     </Navbar.Collapse>

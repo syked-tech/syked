@@ -1,4 +1,5 @@
 export const ROOT = '/';
+export const CONTACT_PAGE = '/contact';
 export const LOGIN_PAGE = '/login';
 export const DASHBOARD_PAGE = '/dashboard/:username';
 export const SIGNUP = '/dashboard/:username';

@@ -1,5 +1,13 @@
 import React from 'react';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
 
 export default function LogIn() {
-  return <div>LogIn</div>;
+  return (
+    <>
+      <Header />
+      LogIn
+      <Footer />
+    </>
+  );
 }
