@@ -1,6 +1,8 @@
 export const ROOT = '/';
 export const CONTACT_PAGE = '/contact';
 export const LOGIN_PAGE = '/login';
+export const SIGN_UP_PAGE = '/sign-up';
+export const FORGOT_PASSWORD_PAGE = '/forgot-password';
 export const DASHBOARD_PAGE = '/dashboard/:username';
 export const SIGNUP = '/dashboard/:username';
 export const SIGNIN = '/dashboard/:username';

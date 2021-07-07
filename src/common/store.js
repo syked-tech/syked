@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import history from 'common/history';
 import { apiMiddleware } from 'redux-api-middleware';
 import notifications from 'components/Notifier/reducer';
-
+import finalForm from 'common/util/finalFormDuck';
 import authReducer from 'containers/Auth/authSlice';
 // import customerReducer from 'containers/Customers/customerSlice';
 // import policiesReducer from 'containers/Policies/policiesSlice';
@@ -18,7 +18,7 @@ const sagaMiddleware = createSagaMiddleware();
 const router = routerMiddleware(history);
 
 const rootReducer = combineReducers({
-  // form,
+  finalForm,
   notifier: notifications,
   auth: authReducer,
   // customer: customerReducer,

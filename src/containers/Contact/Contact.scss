@@ -43,6 +43,15 @@
 			align-items: center;
 			border-radius: 10px;
 
+      h2 {
+        color: $black-32;
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 32px;
+        font-weight: 600;
+        font-family: 'Roboto Slab';
+      }
+
 			@media screen and (max-width:$mob) {
 				padding: 10px;
 
@@ -162,7 +171,7 @@
 							}
 
 							span.g-icon {
-								// background: url('assets/img/btn_google_light_normal_ios.svg') center;
+								background-position: center;
 								width: 20px;
 								height: 32px;
 								background-size: cover;
