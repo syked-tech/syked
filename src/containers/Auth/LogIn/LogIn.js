@@ -1,5 +1,7 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,11 +10,13 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import * as ROUTES from 'common/constants';
 import FormStateToRedux from 'common/util/FormStateToRedux';
-import GLogo from './btn_google_light_normal_ios.svg';
 
-export default function LogIn() {
+import { signIn as signInAction } from 'containers/Auth/authSlice';
+import GLogo from 'common/btn_google_light_normal_ios.svg';
+
+function LogIn({ signIn }) {
   const onSubmit = (values) => {
-    console.log(values);
+    signIn(values);
   };
   return (
     <>
@@ -95,5 +99,13 @@ export default function LogIn() {
 }
 
 LogIn.propTypes = {
-  // handleSubmit: PropTypes.func,
+  signIn: PropTypes.func,
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  signIn: (values) => dispatch(signInAction(values)),
+});
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(withConnect)(LogIn);

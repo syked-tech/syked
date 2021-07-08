@@ -297,3 +297,131 @@
 	}
 
 }
+
+	/**radio design**/
+	.my-radio {
+		position: relative;
+
+		input[type=radio] {
+			position: absolute;
+			visibility: hidden;
+			height: auto !important;
+
+			&:checked~.check {
+				border-color: $green;
+				background: $green;
+			}
+
+		}
+
+		label {
+			display: block;
+			position: relative;
+			font-size: 15px;
+			padding: 0 0 0 30px;
+			margin: 0;
+			z-index: 6;
+			cursor: pointer;
+			transition: all 0.25s linear;
+		}
+
+		.check {
+			display: block;
+			position: absolute;
+			border: 5px solid rgba($black, 0.15);
+			border-radius: 20px;
+			height: 18px;
+			width: 18px;
+			top: 3px;
+			left: 3px;
+			z-index: 4;
+			transition: border .25s linear;
+			-webkit-transition: border .25s linear;
+
+			&:before {
+				display: block;
+				position: absolute;
+				content: "";
+				margin: auto;
+				line-height: 17px;
+				text-align: center;
+				width: 8px;
+				height: 8px;
+				font-weight: 600;
+				top: 0px;
+				left: 0;
+				right: 0;
+				background: $white;
+				border-radius: 20px;
+			}
+
+		}
+
+	}
+
+	/**Check Box Design**/
+	.my-check {
+		position: relative;
+
+		input[type=checkbox] {
+			position: absolute;
+			visibility: hidden;
+			height: auto !important;
+
+			&:checked~.check {
+				border: 2px solid $green;
+
+				&:before {
+					border-color: $green;
+				}
+
+			}
+
+		}
+
+		label {
+			display: block;
+			position: relative;
+			font-size: 15px;
+			padding: 0 0 0 30px;
+			margin: 0;
+			z-index: 6;
+			cursor: pointer;
+			transition: all 0.25s linear;
+		}
+
+		.check {
+			display: block;
+			position: absolute;
+			border: 2px solid $gray;
+			border-radius: 2px;
+			height: 20px;
+			width: 20px;
+			top: 2px;
+			left: 2px;
+			z-index: 4;
+			transition: border .25s linear;
+			-webkit-transition: border .25s linear;
+
+			&:before {
+				display: block;
+				position: absolute;
+				content: "";
+				margin: auto;
+				font-size: 13px;
+				line-height: 17px;
+				text-align: center;
+				width: 13px;
+				height: 7px;
+				font-weight: 600;
+				border-left: 3px solid rgba($black, 0.05);
+				border-bottom: 3px solid rgba($black, 0.05);
+				transform: rotate(-45deg);
+				top: 3px;
+				left: 0;
+				right: 0;
+			}
+
+		}
+
+	}

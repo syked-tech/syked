@@ -10,6 +10,7 @@ import NotFound from 'containers/NotFound';
 import Home from 'containers/Home';
 import Contact from 'containers/Contact';
 import LogIn from 'containers/Auth/LogIn';
+import SignUp from 'containers/Auth/SignUp';
 import Dashboard from 'containers/Dashboard';
 
 export default function Routes({ appProps }) {
@@ -22,6 +23,12 @@ export default function Routes({ appProps }) {
           component={LogIn}
           exact
           path={ROUTES.LOGIN_PAGE}
+        />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={SignUp}
+          exact
+          path={ROUTES.SIGN_UP_PAGE}
         />
         <UnauthenticatedRoute
           appProps={appProps}

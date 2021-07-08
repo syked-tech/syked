@@ -14,44 +14,55 @@ import {
 // const hostname = window && window.location && window.location.hostname;
 
 export function* signIn(actions) {
-  const { Username, Password } = actions.payload;
+  const body = actions.payload;
+  const options = {
+    url: API.LOGIN_API,
+    method: 'POST',
+    // headers: {
+    //   Authorization: idToken.jwtToken,
+    // },
+    data: JSON.stringify(body),
+  };
   try {
     // eslint-disable-next-line no-undef
-    const authResponse = yield Auth.signIn(Username, Password);
+    const authResponse = yield call(axios, options);
+    // eslint-disable-next-line no-console
+    console.log(authResponse);
+
     // yield put(AuthSlice.signInSuccess(authResponse));
 
-    const { challengeName } = authResponse;
-    switch (challengeName && challengeName.value) {
-      case 'NEW_PASSWORD_REQUIRED': {
-        // yield put(push(`/change/${encodeURIComponent(Username)}`));
-        return;
-      }
-      default: {
-        yield call(loginSuccessSaga, authResponse);
-        yield put(
-          enqueueSnackbarAction({
-            message: 'Signed in successfully',
-            options: {
-              key: new Date().getTime() + Math.random(),
-              variant: 'success',
-              action: () => null,
-            },
-          }),
-        );
-      }
-    }
+    // const { challengeName } = authResponse;
+    // switch (challengeName && challengeName.value) {
+    //   case 'NEW_PASSWORD_REQUIRED': {
+    //     // yield put(push(`/change/${encodeURIComponent(Username)}`));
+    //     return;
+    //   }
+    //   default: {
+    //     yield call(loginSuccessSaga, authResponse);
+    //     yield put(
+    //       enqueueSnackbarAction({
+    //         message: 'Signed in successfully',
+    //         options: {
+    //           key: new Date().getTime() + Math.random(),
+    //           variant: 'success',
+    //           action: () => null,
+    //         },
+    //       }),
+    //     );
+    //   }
+    // }
   } catch (error) {
-    yield put(AuthSlice.signInFailed(error));
-    yield put(
-      enqueueSnackbarAction({
-        message: error.message,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'error',
-          action: () => null,
-        },
-      }),
-    );
+    // yield put(AuthSlice.signInFailed(error));
+    // yield put(
+    //   enqueueSnackbarAction({
+    //     message: error.message,
+    //     options: {
+    //       key: new Date().getTime() + Math.random(),
+    //       variant: 'error',
+    //       action: () => null,
+    //     },
+    //   }),
+    // );
   }
 }
 
