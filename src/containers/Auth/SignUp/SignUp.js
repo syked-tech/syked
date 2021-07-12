@@ -20,7 +20,13 @@ function SignUp({ signUp }) {
     signUp(values);
   };
   const initialValues = {
-    user_type: 'patient',
+    user_type: 'customer',
+    social_type: '',
+    social_key: '',
+    kin_name: '',
+    kin_number: '',
+    used_referral: '',
+    group_code: '',
   };
   return (
     <>
@@ -34,10 +40,9 @@ function SignUp({ signUp }) {
                   onSubmit={onSubmit}
                   initialValues={initialValues}
                   subscription={{ values: true, submitting: true, pristine: true }}
-                  render={({ handleSubmit, form, submitting, pristine }) => (
+                  render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
                       <FormStateToRedux form="SIGN_UP_FORM" />
-                      {/* <pre>{JSON.stringify({ values, form }, 0, 2)}</pre> */}
                       <div className="login_left">
                         <div className="">
                           <h2 className="mb-4">Create Account</h2>
@@ -47,11 +52,11 @@ function SignUp({ signUp }) {
                                 component="input"
                                 className="form-check-input"
                                 name="user_type"
-                                id="patient"
+                                id="customer"
                                 type="radio"
-                                value="patient"
+                                value="customer"
                               />
-                              <label className="form-check-label" htmlFor="patient">
+                              <label className="form-check-label" htmlFor="customer">
                                 Patient
                               </label>
                               <span className="check"></span>
@@ -72,15 +77,20 @@ function SignUp({ signUp }) {
                             </div>
                           </div>
                           <div className="mb-4 login_btn d-flex align-items-center justify-content-between">
-                            <div href="#0" id="customGBtn" className="btn customGPlusSignIn">
+                            <Link
+                              component="div"
+                              disabled
+                              href="#0"
+                              id="customGBtn"
+                              className="btn customGPlusSignIn">
                               <span
                                 className="g-icon"
                                 style={{ backgroundImage: `url(${GLogo})` }}></span>
                               <span className="buttonGText">Google</span>
-                            </div>
-                            <a href="#0" className="btn">
+                            </Link>
+                            <Link disabled href="#0" className="btn">
                               <FontAwesomeIcon icon={faFacebookF} /> Facebook
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -213,45 +223,50 @@ function SignUp({ signUp }) {
                           )}
                         </Field>
                       </div>
-                      <div className="form-group">
-                        <Field
-                          type="text"
-                          component="input"
-                          className="form-control"
-                          placeholder="Next of Kin Name"
-                          name="kin_name"
-                          maxLength="100"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          type="text"
-                          component="input"
-                          className="form-control"
-                          name="kin_number"
-                          placeholder="Next of Kin Number"
-                          pattern="^(0|[0-9]*)$"
-                          minLength="8"
-                          maxLength="15"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          type="text"
-                          component="input"
-                          className="form-control"
-                          name="used_group_code"
-                          placeholder="Group Code"
-                          maxLength="10"
-                        />
-                      </div>
+                      {values?.user_type === 'customer' ? (
+                        <>
+                          <div className="form-group">
+                            <Field
+                              type="text"
+                              component="input"
+                              className="form-control"
+                              placeholder="Next of Kin Name"
+                              name="kin_name"
+                              maxLength="100"
+                            />
+                          </div>
+                          <div className="form-group">
+                            <Field
+                              type="text"
+                              component="input"
+                              className="form-control"
+                              name="kin_number"
+                              placeholder="Next of Kin Number"
+                              pattern="^(0|[0-9]*)$"
+                              minLength="8"
+                              maxLength="15"
+                            />
+                          </div>
+                          <div className="form-group">
+                            <Field
+                              type="text"
+                              component="input"
+                              className="form-control"
+                              name="used_group_code"
+                              placeholder="Group Code"
+                              maxLength="10"
+                            />
+                          </div>
+                        </>
+                      ) : null}
+
                       <div className="form_text">
                         <p>
                           By signing up you agree to our
                           <Link target="_blank" to={ROUTES.TERMS_PAGE}>
                             Terms of Service.
                           </Link>
-                          and
+                          <span>and </span>
                           <Link target="_blank" to={ROUTES.PRIVACY_PAGE}>
                             Privacy Policy
                           </Link>

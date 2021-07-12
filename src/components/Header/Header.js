@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -38,7 +39,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+// eslint-disable-next-line no-unused-vars
+export default function Header({ isAuthenticated = false }) {
   const classes = useStyles();
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -63,9 +65,9 @@ export default function Header() {
           color="inherit"
           elevation={0}
           className={clsx(classes.appBar, {
-            [classes.appBarFull]: trigger,
+            [classes.appBarFull]: trigger || isAuthenticated,
           })}
-          position={isMobile ? 'fixed' : 'static'}>
+          position={isMobile || isAuthenticated ? 'fixed' : 'static'}>
           <Container disableGutters maxWidth="lg">
             <Toolbar>
               <div className="container main_header">
@@ -73,7 +75,7 @@ export default function Header() {
                   <>
                     <div className="navbar-header d-flex align-items-center justify-content-between">
                       <NavLink className="p-0 navbar-brand" to={ROUTES.ROOT} onClick={handleClick}>
-                        {trigger ? (
+                        {trigger || isAuthenticated ? (
                           <img
                             className={classes.navbarBrandLogo}
                             src="assets/img/white_logo.png"
@@ -99,51 +101,92 @@ export default function Header() {
                           <NavLink
                             exact
                             onClick={handleClick}
-                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                            className={`${
+                              trigger || isAuthenticated ? 'alt-nav-link' : null
+                            } nav-link`}
                             to={`${ROUTES.ROOT}#home-section`}>
                             Home
                           </NavLink>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                            className={`${
+                              trigger || isAuthenticated ? 'alt-nav-link' : null
+                            } nav-link`}
                             href="#professionals-section">
                             Our Professionals
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                            className={`${
+                              trigger || isAuthenticated ? 'alt-nav-link' : null
+                            } nav-link`}
                             href="#how-it-works-setion">
                             How it Works
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                            className={`${
+                              trigger || isAuthenticated ? 'alt-nav-link' : null
+                            } nav-link`}
                             href="#0">
                             Blog
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                            className={`${
+                              trigger || isAuthenticated ? 'alt-nav-link' : null
+                            } nav-link`}
                             href="#testimonials-section">
                             Testimonials
                           </Nav.Link>
                         </li>
+                        {isAuthenticated ? (
+                          <li className="nav-item">
+                            <NavLink
+                              exact
+                              onClick={handleClick}
+                              className={`${
+                                trigger || isAuthenticated ? 'alt-nav-link' : null
+                              } nav-link`}
+                              to={ROUTES.DASHBOARD_PAGE}>
+                              My Account
+                            </NavLink>
+                          </li>
+                        ) : (
+                          <li className="nav-item">
+                            <NavLink
+                              exact
+                              onClick={handleClick}
+                              className={`${
+                                trigger || isAuthenticated ? 'alt-nav-link' : null
+                              } nav-link`}
+                              to={ROUTES.LOGIN_PAGE}>
+                              Sign up / Login
+                            </NavLink>
+                          </li>
+                        )}
+                        {isAuthenticated ? (
+                          <li className="nav-item">
+                            <NavLink
+                              exact
+                              onClick={handleClick}
+                              className={`${
+                                trigger || isAuthenticated ? 'alt-nav-link' : null
+                              } nav-link`}
+                              to={ROUTES.SUPPORT_GROUP_PAGE}>
+                              Support Group
+                            </NavLink>
+                          </li>
+                        ) : null}
                         <li className="nav-item">
                           <NavLink
-                            exact
-                            onClick={handleClick}
-                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
-                            to={ROUTES.LOGIN_PAGE}>
-                            Sign up / Login
-                          </NavLink>
-                        </li>
-                        <li className="nav-item">
-                          <NavLink
-                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                            className={`${
+                              trigger || isAuthenticated ? 'alt-nav-link' : null
+                            } nav-link`}
                             activeClassName="active"
                             to={ROUTES.CONTACT_PAGE}>
                             Contact Us
@@ -161,3 +204,7 @@ export default function Header() {
     </div>
   );
 }
+
+Header.propTypes = {
+  isAuthenticated: PropTypes.bool,
+};

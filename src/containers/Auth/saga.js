@@ -1,26 +1,29 @@
 import { call, put, takeLatest, select } from 'redux-saga/effects';
+import { Cookies } from 'react-cookie';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 import * as AuthSlice from 'containers/Auth/authSlice';
 // import * as UserSlice from 'containers/Users/usersSlice';
-import * as ROUTES from 'common/constants';
+import * as CONSTANTS from 'common/constants';
 import * as API from 'common/api';
 import {
   enqueueSnackbar as enqueueSnackbarAction,
   // closeSnackbar as closeSnackbarAction,
 } from 'components/Notifier/actions';
 // import { redirectSignin } from 'common/redirects';
-
 // const hostname = window && window.location && window.location.hostname;
+
+const cookies = new Cookies();
 
 export function* signIn(actions) {
   const body = actions.payload;
   const options = {
     url: API.LOGIN_API,
     method: 'POST',
-    // headers: {
-    //   Authorization: idToken.jwtToken,
-    // },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    },
     data: JSON.stringify(body),
   };
   try {
@@ -28,7 +31,11 @@ export function* signIn(actions) {
     const authResponse = yield call(axios, options);
     // eslint-disable-next-line no-console
     console.log(authResponse);
-
+    // eslint-disable-next-line no-undef
+    const expires = new Date(exp * 1000);
+    // eslint-disable-next-line no-undef
+    yield cookies.set(CONSTANTS.JWT_NAME, token, { expires });
+    yield put(push(CONSTANTS.DASHBOARD_PAGE));
     // yield put(AuthSlice.signInSuccess(authResponse));
 
     // const { challengeName } = authResponse;
@@ -67,25 +74,24 @@ export function* signIn(actions) {
 }
 
 export function* signUp(actions) {
-  const { name, surname, email, password } = actions.payload;
+  const body = actions.payload;
+  const options = {
+    url: API.LOGIN_API,
+    method: 'POST',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'application/json',
+    },
+    data: JSON.stringify(body),
+  };
   try {
-    // eslint-disable-next-line no-undef
-    const authResponse = yield Auth.signUp({
-      username: email,
-      password,
-      attributes: {
-        email,
-        name,
-        family_name: surname,
-        profile: 'test-profile',
-        preferred_username: 'test-profile',
-      },
-    });
+    const authResponse = yield call(axios, options);
     yield put(AuthSlice.signUpSuccess(authResponse));
-    yield put(push(`${ROUTES.SIGNUP}/${encodeURIComponent(email)}`));
+    // redirect to verify
+    yield put(push(CONSTANTS.VERIFICATION_PAGE));
     yield put(
       enqueueSnackbarAction({
-        message: `Confirmation email successfully sent to ${email}`,
+        message: `Confirmation code successfully sent to ${body?.mobile_number}`,
         options: {
           key: new Date().getTime() + Math.random(),
           variant: 'success',
@@ -114,7 +120,7 @@ export function* confirmSignUp(actions) {
     // eslint-disable-next-line no-undef
     const authResponse = yield Auth.confirmSignUp(email, confirmationCode);
     yield put(AuthSlice.confirmSignUpSuccess(authResponse));
-    yield put(push(ROUTES.SIGNIN));
+    // yield put(push(CONSTANTS.SIGNIN));
     yield put(
       enqueueSnackbarAction({
         message: 'User confirmed successfully',
@@ -146,25 +152,25 @@ export function* loginSuccessSaga(data) {
 
   switch (payload['cognito:groups'][0]) {
     case 'SuperAdmin': {
-      // yield put(push(`/r/${encodeURIComponent(redirectSignin(hostname))}`));
+      // yield put(push(VERIFICATION_PAGE));
 
       return;
     }
     case 'Admin': {
-      // const uri = `${redirectSignin(hostname)}/${payload.profile}${ROUTES.DASHBOARD}`;
+      // const uri = `${redirectSignin(hostname)}/${payload.profile}${CONSTANTS.DASHBOARD}`;
       // yield put(push(`/r/${encodeURIComponent(uri)}`));
 
       return;
     }
     case 'Consultant': {
-      // const uri = `${redirectSignin(hostname)}/${payload.profile}${ROUTES.DASHBOARD}`;
+      // const uri = `${redirectSignin(hostname)}/${payload.profile}${CONSTANTS.DASHBOARD}`;
       // yield put(push(`/r/${encodeURIComponent(uri)}`));
 
       return;
     }
     // TODO: Error page, user
     default: {
-      yield put(push(ROUTES.ROOT));
+      yield put(push(CONSTANTS.ROOT));
     }
   }
 }
@@ -175,7 +181,7 @@ export function* resetPassword(actions) {
     // eslint-disable-next-line no-undef
     const authResponse = yield Auth.forgotPassword(Username);
     yield put(AuthSlice.resetPasswordSuccess(authResponse));
-    yield put(push(`${ROUTES.FORGOT_PASSWORD}/${encodeURIComponent(Username)}`));
+    // yield put(push(`${CONSTANTS.FORGOT_PASSWORD}/${encodeURIComponent(Username)}`));
   } catch (error) {
     yield put(AuthSlice.resetPasswordFailed(error));
     yield put(
@@ -197,7 +203,7 @@ export function* confirmPassword(actions) {
     // eslint-disable-next-line no-undef
     const authResponse = yield Auth.forgotPasswordSubmit(Username, SessionCode, NewPassword);
     yield put(AuthSlice.resetPasswordSuccess(authResponse));
-    yield put(push(ROUTES.SIGNIN));
+    // yield put(push(CONSTANTS.SIGNIN));
     yield put(
       enqueueSnackbarAction({
         message: 'Password changed successfully',
@@ -233,7 +239,7 @@ export function* changePassword(actions) {
     const authResponse = yield Auth.changePassword(user, OldPassword, NewPassword);
     yield put(AuthSlice.changePasswordSuccess(authResponse));
     if (!isAccount) {
-      yield put(push(ROUTES.SIGNIN));
+      // yield put(push(CONSTANTS.SIGNIN));
     }
     yield put(
       enqueueSnackbarAction({
@@ -319,7 +325,7 @@ export function* validateInvite(actions) {
   try {
     const authResponse = yield call(axios, options);
     yield put(AuthSlice.validateInviteSuccess(authResponse.data.data));
-    // yield put(push(ROUTES.CUSTOMERS));
+    // yield put(push(CONSTANTS.CUSTOMERS));
     yield put(
       enqueueSnackbarAction({
         message: authResponse.data.message,
