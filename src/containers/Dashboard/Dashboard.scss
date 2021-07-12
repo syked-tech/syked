@@ -1,9 +1,11 @@
 @import "common/_variables";
 
 .service_section {
-  // padding-top: 170px;
   position: relative;
   z-index: 2;
+  &.dash {
+    padding-top: 170px;
+  }
 
   .user {
     padding: 20px;

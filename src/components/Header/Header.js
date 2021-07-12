@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -37,11 +37,16 @@ const useStyles = makeStyles((theme) => ({
     transition: 'all ease 250ms',
     maxWidth: '100%',
   },
+  isDash: {
+    borderRadius: 0,
+    maxWidth: '100%',
+  },
 }));
 
 // eslint-disable-next-line no-unused-vars
 export default function Header({ isAuthenticated = false }) {
   const classes = useStyles();
+  const { pathname } = useLocation();
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 20,
@@ -58,6 +63,8 @@ export default function Header({ isAuthenticated = false }) {
     }
   };
 
+  const isDash = pathname === ROUTES.DASHBOARD_PAGE;
+
   return (
     <div className={classes.root}>
       <Container maxWidth="lg">
@@ -65,9 +72,10 @@ export default function Header({ isAuthenticated = false }) {
           color="inherit"
           elevation={0}
           className={clsx(classes.appBar, {
-            [classes.appBarFull]: trigger || isAuthenticated,
+            [classes.appBarFull]: trigger,
+            [classes.isDash]: isDash,
           })}
-          position={isMobile || isAuthenticated ? 'fixed' : 'static'}>
+          position={isMobile || isDash ? 'fixed' : 'static'}>
           <Container disableGutters maxWidth="lg">
             <Toolbar>
               <div className="container main_header">
@@ -75,7 +83,7 @@ export default function Header({ isAuthenticated = false }) {
                   <>
                     <div className="navbar-header d-flex align-items-center justify-content-between">
                       <NavLink className="p-0 navbar-brand" to={ROUTES.ROOT} onClick={handleClick}>
-                        {trigger || isAuthenticated ? (
+                        {trigger ? (
                           <img
                             className={classes.navbarBrandLogo}
                             src="assets/img/white_logo.png"
@@ -101,45 +109,35 @@ export default function Header({ isAuthenticated = false }) {
                           <NavLink
                             exact
                             onClick={handleClick}
-                            className={`${
-                              trigger || isAuthenticated ? 'alt-nav-link' : null
-                            } nav-link`}
+                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
                             to={`${ROUTES.ROOT}#home-section`}>
                             Home
                           </NavLink>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${
-                              trigger || isAuthenticated ? 'alt-nav-link' : null
-                            } nav-link`}
+                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
                             href="#professionals-section">
                             Our Professionals
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${
-                              trigger || isAuthenticated ? 'alt-nav-link' : null
-                            } nav-link`}
+                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
                             href="#how-it-works-setion">
                             How it Works
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${
-                              trigger || isAuthenticated ? 'alt-nav-link' : null
-                            } nav-link`}
+                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
                             href="#0">
                             Blog
                           </Nav.Link>
                         </li>
                         <li className="nav-item">
                           <Nav.Link
-                            className={`${
-                              trigger || isAuthenticated ? 'alt-nav-link' : null
-                            } nav-link`}
+                            className={`${trigger ? 'alt-nav-link' : null} nav-link`}
                             href="#testimonials-section">
                             Testimonials
                           </Nav.Link>
@@ -149,9 +147,7 @@ export default function Header({ isAuthenticated = false }) {
                             <NavLink
                               exact
                               onClick={handleClick}
-                              className={`${
-                                trigger || isAuthenticated ? 'alt-nav-link' : null
-                              } nav-link`}
+                              className={`${trigger ? 'alt-nav-link' : null} nav-link`}
                               to={ROUTES.DASHBOARD_PAGE}>
                               My Account
                             </NavLink>

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { SnackbarProvider } from 'notistack';
 import { ConnectedRouter } from 'connected-react-router';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { CookiesProvider } from 'react-cookie';
 import { store } from 'common/store';
 import history from 'common/history';
 import App from './App';
@@ -13,12 +14,22 @@ import GlobalStyles from './GlobalStyles';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <SnackbarProvider>
-        <ConnectedRouter history={history}>
-          <CssBaseline />
-          <GlobalStyles />
-          <App />
-        </ConnectedRouter>
+      <SnackbarProvider
+        preventDuplicate
+        hideIconVariant
+        dense
+        autoHideDuration={3000}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}>
+        <CookiesProvider>
+          <ConnectedRouter history={history}>
+            <CssBaseline />
+            <GlobalStyles />
+            <App />
+          </ConnectedRouter>
+        </CookiesProvider>
       </SnackbarProvider>
     </Provider>
   </React.StrictMode>,

@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { useCookies } from 'react-cookie';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -22,6 +25,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import { signOut as signOutAction } from 'containers/Auth/authSlice';
 import * as ROUTES from 'common/constants';
 
 import './Dashboard.scss';
@@ -115,14 +119,17 @@ const MenuList = ({ userType }) => {
   }
 };
 
-export default function Dashboard() {
+function Dashboard({ signOut }) {
+  // eslint-disable-next-line no-unused-vars
+  const [cookies, setCookie, removeCookie] = useCookies([ROUTES.JWT_NAME]);
   const userType = 'customer'; // therapist
+
   return (
     <>
       <Header isAuthenticated />
       <div className="wrapper top-margin inner_wrap">
         <Box component="section" className="site_listing site_detail">
-          <Container maxWidth="lg" className="service_section">
+          <Container maxWidth="lg" className="service_section dash">
             <Grid container justify="center" spacing={3}>
               <Grid item xs={12} sm={4} md={3}>
                 <div className="deatail_box p-0">
@@ -130,9 +137,9 @@ export default function Dashboard() {
                   <ul className="side_bar p-0">
                     <MenuList userType={userType} />
                     <li>
-                      <a href="#0">
+                      <Link disabled to="#0" onClick={signOut}>
                         <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -216,3 +223,15 @@ export default function Dashboard() {
 MenuList.propTypes = {
   userType: PropTypes.string,
 };
+
+Dashboard.propTypes = {
+  signOut: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOutAction()),
+});
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(withConnect)(Dashboard);

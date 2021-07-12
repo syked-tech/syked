@@ -94,7 +94,7 @@ body {
 			margin: 0;
 			z-index: 6;
 			cursor: pointer;
-			-webkit-transition: all 0.25s linear;
+			transition: all 0.25s linear;
 		}
 
 		.check {
@@ -159,7 +159,7 @@ body {
 			margin: 0;
 			z-index: 6;
 			cursor: pointer;
-			-webkit-transition: all 0.25s linear;
+			transition: all 0.25s linear;
 		}
 
 		.check {
@@ -199,11 +199,11 @@ body {
 	}
 
 	h1, h2, h3, h4 {
-		font-family: $font-rb-bd;
+		font-family: 'Roboto Slab';
 	}
 
 	h5, h6 {
-		font-family: $font-md;
+		font-family: 'Roboto Slab';
 	}
 
 	*, *:focus, *:active {

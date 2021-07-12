@@ -29,12 +29,23 @@ export const authSlice = createSlice({
       state.isLoadingSignIn = false;
       state.isAuthenticated = false;
     },
+    signOut: (state) => {
+      state.isLoadingsignOut = true;
+    },
+    signOutSuccess: (state) => {
+      state.isLoadingsignOut = false;
+      state.isAuthenticated = false;
+    },
+    signOutFailed: (state) => {
+      state.isLoadingsignOut = false;
+      state.isAuthenticated = false;
+    },
     userHasAuthenticated: (state, action) => {
       state.isAuthenticated = action.payload;
     },
     userSession: (state, action) => {
       state.userSession = action.payload;
-      state.user = action.payload.idToken.payload;
+      // state.user = action.payload.idToken.payload;
     },
     signUp: (state) => {
       state.isLoadingSignUp = true;
@@ -124,6 +135,9 @@ export const {
   signIn,
   signInSuccess,
   signInFailed,
+  signOut,
+  signOutSuccess,
+  signOutFailed,
   userSession,
   userHasAuthenticated,
   signUp,

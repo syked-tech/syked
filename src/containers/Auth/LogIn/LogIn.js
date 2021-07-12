@@ -33,18 +33,13 @@ function LogIn({ signIn }) {
                       <div className="login_left">
                         <h2 className="mb-3">Login</h2>
                         <div className="mb-4 login_btn d-flex justify-content-between">
-                          <Link
-                            component="div"
-                            disabled
-                            href="#0"
-                            id="customGBtn"
-                            className="btn customGPlusSignIn">
+                          <Link disabled to="#0" id="customGBtn" className="btn customGPlusSignIn">
                             <span
                               className="g-icon"
                               style={{ backgroundImage: `url(${GLogo})` }}></span>
                             <span className="buttonGText">Google</span>
                           </Link>
-                          <Link disabled href="#0" className="btn">
+                          <Link disabled to="#0" className="btn">
                             <FontAwesomeIcon icon={faFacebookF} /> Facebook
                           </Link>
                         </div>

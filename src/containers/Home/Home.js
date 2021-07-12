@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Header from 'components/Header';
@@ -6,11 +7,13 @@ import Footer from 'components/Footer';
 import Professionals from 'containers/Professionals';
 import HowItWorks from 'containers/HowItWorks';
 import Testimonials from 'containers/Testimonials';
+import { selectIsAuthenticated } from 'containers/Auth/authSlice';
 import 'tiny-slider/dist/tiny-slider.css';
 import { tns } from 'tiny-slider/src/tiny-slider';
 import './Home.scss';
 
 export default function Home() {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   useEffect(() => {
     tns({
       container: '.slider',
@@ -30,7 +33,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       <section id="home-section">
         <div className="slider">
           <div className="banner_section">

@@ -20,44 +20,26 @@ export function* signIn(actions) {
   const options = {
     url: API.LOGIN_API,
     method: 'POST',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
     data: JSON.stringify(body),
   };
   try {
-    // eslint-disable-next-line no-undef
     const authResponse = yield call(axios, options);
-    // eslint-disable-next-line no-console
-    console.log(authResponse);
-    // eslint-disable-next-line no-undef
+    const token = authResponse?.data?.AuthenticationResult?.IdToken;
+    const { exp } = JSON.parse(atob(token.split('.')[1]));
     const expires = new Date(exp * 1000);
-    // eslint-disable-next-line no-undef
-    yield cookies.set(CONSTANTS.JWT_NAME, token, { expires });
+    yield cookies.set(CONSTANTS.JWT_NAME, token, { path: '/', expires });
+    yield put(AuthSlice.signInSuccess(authResponse.data));
     yield put(push(CONSTANTS.DASHBOARD_PAGE));
-    // yield put(AuthSlice.signInSuccess(authResponse));
-
-    // const { challengeName } = authResponse;
-    // switch (challengeName && challengeName.value) {
-    //   case 'NEW_PASSWORD_REQUIRED': {
-    //     // yield put(push(`/change/${encodeURIComponent(Username)}`));
-    //     return;
-    //   }
-    //   default: {
-    //     yield call(loginSuccessSaga, authResponse);
-    //     yield put(
-    //       enqueueSnackbarAction({
-    //         message: 'Signed in successfully',
-    //         options: {
-    //           key: new Date().getTime() + Math.random(),
-    //           variant: 'success',
-    //           action: () => null,
-    //         },
-    //       }),
-    //     );
-    //   }
-    // }
+    yield put(
+      enqueueSnackbarAction({
+        message: 'Login successfully',
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'success',
+          action: () => null,
+        },
+      }),
+    );
   } catch (error) {
     // yield put(AuthSlice.signInFailed(error));
     // yield put(
@@ -73,15 +55,46 @@ export function* signIn(actions) {
   }
 }
 
+export function* signOut() {
+  try {
+    const expires = new Date();
+    yield cookies.remove(CONSTANTS.JWT_NAME, { path: '/', expires });
+    yield put(AuthSlice.signOutSuccess());
+    yield put(push(CONSTANTS.LOGIN_PAGE));
+    yield put(
+      enqueueSnackbarAction({
+        message: 'Logout successfully',
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'success',
+          action: () => null,
+        },
+      }),
+    );
+  } catch (error) {
+    yield put(AuthSlice.signOutFailed(error));
+    yield put(
+      enqueueSnackbarAction({
+        message: error?.message,
+        options: {
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+          },
+          key: new Date().getTime() + Math.random(),
+          variant: 'error',
+          action: () => null,
+        },
+      }),
+    );
+  }
+}
+
 export function* signUp(actions) {
   const body = actions.payload;
   const options = {
     url: API.LOGIN_API,
     method: 'POST',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
     data: JSON.stringify(body),
   };
   try {
@@ -392,6 +405,7 @@ export function* deactivateUser(actions) {
 
 export default function* userSaga() {
   yield takeLatest(AuthSlice.signIn.type, signIn);
+  yield takeLatest(AuthSlice.signOut.type, signOut);
   yield takeLatest(AuthSlice.signUp.type, signUp);
   yield takeLatest(AuthSlice.confirmSignUp.type, confirmSignUp);
   yield takeLatest(AuthSlice.resetPassword.type, resetPassword);
