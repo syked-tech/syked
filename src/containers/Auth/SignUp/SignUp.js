@@ -76,11 +76,10 @@ function SignUp({ signUp }) {
                               <span className="check"></span>
                             </div>
                           </div>
-                          <div className="mb-4 login_btn d-flex align-items-center justify-content-between">
+                          <div className="mb-4 login_btn d-flex justify-content-between">
                             <Link
-                              component="div"
                               disabled
-                              href="#0"
+                              to="#0"
                               id="customGBtn"
                               className="btn customGPlusSignIn">
                               <span
@@ -88,8 +87,10 @@ function SignUp({ signUp }) {
                                 style={{ backgroundImage: `url(${GLogo})` }}></span>
                               <span className="buttonGText">Google</span>
                             </Link>
-                            <Link disabled href="#0" className="btn">
-                              <FontAwesomeIcon icon={faFacebookF} /> Facebook
+                            <Link disabled to="#0" className="btn">
+                              <span>
+                                <FontAwesomeIcon icon={faFacebookF} /> Facebook
+                              </span>
                             </Link>
                           </div>
                         </div>

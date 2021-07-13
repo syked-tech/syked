@@ -117,7 +117,7 @@
 						&.btn {
 							color: $white;
 							text-decoration: none;
-							padding: 10px 15px;
+							// padding: 10px 15px;
 							border: 1px solid $facebook;
 							border-radius: 4px;
 							background: $facebook;
@@ -125,6 +125,9 @@
 							min-width: 48%;
 							letter-spacing: 1.2px;
 							font-weight: bolder;
+              display: flex;
+              justify-content: center;
+              align-items: center;
 
 							@media screen and (max-width:450px) {
 								padding: 10px 5px !important;

@@ -12,6 +12,7 @@ import Contact from 'containers/Contact';
 import LogIn from 'containers/Auth/LogIn';
 import SignUp from 'containers/Auth/SignUp';
 import Dashboard from 'containers/Dashboard';
+import Questions from 'containers/Questions';
 
 export default function Routes({ appProps }) {
   return (
@@ -35,6 +36,12 @@ export default function Routes({ appProps }) {
           component={Contact}
           exact
           path={ROUTES.CONTACT_PAGE}
+        />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={Questions}
+          exact
+          path={ROUTES.QUESTIONS_PAGE}
         />
         <Switch>
           <AuthenticatedRoute

@@ -40,7 +40,9 @@ function LogIn({ signIn }) {
                             <span className="buttonGText">Google</span>
                           </Link>
                           <Link disabled to="#0" className="btn">
-                            <FontAwesomeIcon icon={faFacebookF} /> Facebook
+                            <span>
+                              <FontAwesomeIcon icon={faFacebookF} /> Facebook
+                            </span>
                           </Link>
                         </div>
                       </div>

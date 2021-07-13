@@ -200,17 +200,20 @@ body {
 
 	h1, h2, h3, h4 {
 		font-family: 'Roboto Slab';
+    font-weight: 600;
 	}
 
 	h5, h6 {
-		font-family: 'Roboto Slab';
+		font-family: 'Avenir medium';
 	}
 
 	*, *:focus, *:active {
 		outline: none;
 		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 	}
-
+  .theme-text-color {
+    color:#bac866;
+  }
 	.btn {
 		transition: all 200ms ease-in;
 		-webkit-transition: all 200ms ease-in;
