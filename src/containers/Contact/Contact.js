@@ -1,12 +1,15 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectIsAuthenticated } from 'containers/Auth/authSlice';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import './Contact.scss';
 
 export default function Contact() {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   return (
     <>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       <section className="login pt-5">
         <div className="container pt-5 pb-4">
           <div className="row align-items-center pt-4 pb-5">

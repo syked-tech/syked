@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Header from 'components/Header';
@@ -10,6 +11,7 @@ import Testimonials from 'containers/Testimonials';
 import { selectIsAuthenticated } from 'containers/Auth/authSlice';
 import 'tiny-slider/dist/tiny-slider.css';
 import { tns } from 'tiny-slider/src/tiny-slider';
+import * as ROUTES from 'common/constants';
 import './Home.scss';
 
 export default function Home() {
@@ -86,9 +88,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h2>Students</h2>
-                  <button type="button" className="btn bg-white">
+                  <Link to={ROUTES.QUESTIONS_PAGE} type="button" className="btn bg-white">
                     Book Now
-                  </button>
+                  </Link>
                 </div>
               </div>
             </Grid>
@@ -99,9 +101,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h2>Employee</h2>
-                  <button type="button" className="btn bg-white">
+                  <Link to={ROUTES.QUESTIONS_PAGE} type="button" className="btn bg-white">
                     Book Now
-                  </button>
+                  </Link>
                 </div>
               </div>
             </Grid>
@@ -112,9 +114,9 @@ export default function Home() {
                 </div>
                 <div>
                   <h2>General Public</h2>
-                  <button type="button" className="btn bg-white">
+                  <Link to={ROUTES.QUESTIONS_PAGE} type="button" className="btn bg-white">
                     Book Now
-                  </button>
+                  </Link>
                 </div>
               </div>
             </Grid>

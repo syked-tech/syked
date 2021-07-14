@@ -1,0 +1,96 @@
+@import "common/_variables";
+
+.consul-section {
+	padding: 60px 0;
+	min-height: 100vh;
+
+	@media screen and (max-width:575px) {
+		padding-bottom: 20px;
+	}
+
+	.request_page {
+		.co-listing {
+			margin: 0;
+			box-shadow: none;
+			border-bottom: 1px solid rgba($black, 0.15);
+			border-radius: 0;
+		}
+
+	}
+
+	.mat-tab-label {
+		opacity: 1;
+
+		.mat-tab-label-content {
+			font-family: $font-rb-bd;
+			font-size: 16px;
+			color: $black-32;
+		}
+
+	}
+
+	.co-listing {
+		padding: 15px 15px;
+		background: $white;
+		border-bottom: 1px solid rgba($black, 0.05);
+
+		.pro-img {
+			height: 80px;
+			width: 80px;
+			min-width: 80px;
+			border-radius: 50%;
+			overflow: hidden;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+
+		}
+
+		.content_list {
+			p {
+				margin: 0;
+				font-family: $font-rg;
+			}
+
+			h4 {
+				font-family: $font-md;
+				margin: 0;
+				font-size: 20px;
+			}
+
+			h5 {
+				margin: 0;
+				font-family: $font-md;
+			}
+
+			h6 {
+				font-size: 14px;
+				margin: 0 0 2px;
+				font-family: $font-bk;
+			}
+
+			.btn {
+				padding: 2px 15px;
+				color: $white;
+			}
+
+			.new_edit {
+				padding: 4px 15px;
+				text-transform: capitalize;
+				font-size: 14px;
+				border-radius: 4px;
+			}
+
+			a {
+				color: $green;
+			}
+
+		}
+
+	}
+
+}

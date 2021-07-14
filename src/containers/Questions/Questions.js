@@ -1,7 +1,9 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Slide from '@material-ui/core/Slide';
+import { selectIsAuthenticated } from 'containers/Auth/authSlice';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
@@ -397,6 +399,7 @@ const QuestionSet = ({ question }) => {
 };
 
 function Questions() {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const [questionsIndex] = useState(questions.map((item) => item.id));
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(questionsIndex[0]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -416,7 +419,7 @@ function Questions() {
   };
   return (
     <>
-      <Header />
+      <Header isAuthenticated={isAuthenticated} />
       <section className="booking pt-5" style={{ backgroundImage: `url(${bookbg})` }}>
         <div className="container pt-5">
           <div className="row pt-3 align-items-center justify-content-center">

@@ -6,6 +6,7 @@ export const authSlice = createSlice({
   initialState: {
     userSession: {},
     user: {},
+    error: null,
     isLoadingSignIn: false,
     isLoadingSignUp: false,
     isAuthenticated: false,
@@ -20,14 +21,17 @@ export const authSlice = createSlice({
   reducers: {
     signIn: (state) => {
       state.isLoadingSignIn = true;
+      state.error = null;
     },
     signInSuccess: (state) => {
       state.isLoadingSignIn = false;
       state.isAuthenticated = true;
+      state.error = null;
     },
-    signInFailed: (state) => {
+    signInFailed: (state, action) => {
       state.isLoadingSignIn = false;
       state.isAuthenticated = false;
+      state.error = action.payload;
     },
     signOut: (state) => {
       state.isLoadingsignOut = true;
@@ -171,6 +175,7 @@ export const {
 
 export const selectUserSession = (state) => state.auth.userSession;
 export const selectUser = (state) => state.auth.user;
+export const selectError = (state) => state.auth.error;
 export const isLoadingSignIn = (state) => state.auth.isLoadingSignIn;
 export const isLoadingSignUp = (state) => state.auth.isLoadingSignUp;
 export const isLoadingConfirmSignUp = (state) => state.auth.isLoadingConfirmSignUp;

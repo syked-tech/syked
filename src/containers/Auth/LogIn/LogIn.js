@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
@@ -11,10 +11,11 @@ import Footer from 'components/Footer';
 import * as ROUTES from 'common/constants';
 import FormStateToRedux from 'common/util/FormStateToRedux';
 
-import { signIn as signInAction } from 'containers/Auth/authSlice';
+import { signIn as signInAction, selectError } from 'containers/Auth/authSlice';
 import GLogo from 'common/btn_google_light_normal_ios.svg';
 
 function LogIn({ signIn }) {
+  const error = useSelector(selectError);
   const onSubmit = (values) => {
     signIn(values);
   };
@@ -46,6 +47,11 @@ function LogIn({ signIn }) {
                           </Link>
                         </div>
                       </div>
+                      {error ? (
+                        <p style={{ color: 'red' }}>
+                          <span>{error}</span>
+                        </p>
+                      ) : null}
                       <div className="form-group">
                         <Field
                           type="text"

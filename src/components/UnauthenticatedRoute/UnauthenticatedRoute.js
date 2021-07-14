@@ -25,13 +25,17 @@ export default function UnauthenticatedRoute({ component: C, appProps, ...rest }
   return (
     <Route
       {...rest}
-      render={(props) =>
-        !appProps.isAuthenticated ? (
-          <C {...props} {...appProps} />
-        ) : (
-          <Redirect to={redirect === '' || redirect === null ? '/' : redirect} />
-        )
-      }
+      render={(props) => {
+        if (appProps.isAuthenticated) {
+          // !appProps.isAuthenticated ? (
+          //   <C {...props} {...appProps} />
+          // ) : (
+          //   <Redirect to={redirect === '' || redirect === null ? '/' : redirect} />
+          // )
+          return <C {...props} {...appProps} />;
+        }
+        return <Redirect to={redirect === '' || redirect === null ? '/' : redirect} />;
+      }}
     />
   );
 }

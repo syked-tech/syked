@@ -24,34 +24,39 @@ export function* signIn(actions) {
   };
   try {
     const authResponse = yield call(axios, options);
-    const token = authResponse?.data?.AuthenticationResult?.IdToken;
-    const { exp } = JSON.parse(atob(token.split('.')[1]));
-    const expires = new Date(exp * 1000);
-    yield cookies.set(CONSTANTS.JWT_NAME, token, { path: '/', expires });
-    yield put(AuthSlice.signInSuccess(authResponse.data));
-    yield put(push(CONSTANTS.DASHBOARD_PAGE));
+    if (authResponse?.data?.data?.AuthenticationResult?.IdToken) {
+      const token = authResponse?.data?.data?.AuthenticationResult?.IdToken;
+      const { exp } = JSON.parse(atob(token.split('.')[1]));
+      const expires = new Date(exp * 1000);
+      yield cookies.set(CONSTANTS.JWT_NAME, token, { path: '/', expires });
+      yield put(AuthSlice.signInSuccess(authResponse?.data?.data));
+      yield put(push(CONSTANTS.DASHBOARD_PAGE));
+      yield put(
+        enqueueSnackbarAction({
+          message: 'Login successfully',
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'success',
+            action: () => null,
+          },
+        }),
+      );
+    } else {
+      const error = 'You have entered wrong credentials.';
+      yield put(AuthSlice.signInFailed(error));
+    }
+  } catch (error) {
+    yield put(AuthSlice.signInFailed(error));
     yield put(
       enqueueSnackbarAction({
-        message: 'Login successfully',
+        message: error.message,
         options: {
           key: new Date().getTime() + Math.random(),
-          variant: 'success',
+          variant: 'error',
           action: () => null,
         },
       }),
     );
-  } catch (error) {
-    // yield put(AuthSlice.signInFailed(error));
-    // yield put(
-    //   enqueueSnackbarAction({
-    //     message: error.message,
-    //     options: {
-    //       key: new Date().getTime() + Math.random(),
-    //       variant: 'error',
-    //       action: () => null,
-    //     },
-    //   }),
-    // );
   }
 }
 

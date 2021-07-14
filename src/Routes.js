@@ -13,6 +13,9 @@ import LogIn from 'containers/Auth/LogIn';
 import SignUp from 'containers/Auth/SignUp';
 import Dashboard from 'containers/Dashboard';
 import Questions from 'containers/Questions';
+import SupportGroup from 'containers/SupportGroup';
+import TherapistList from 'containers/Therapist/TherapistList';
+import TherapistDetails from 'containers/Therapist/TherapistDetails';
 
 export default function Routes({ appProps }) {
   return (
@@ -43,12 +46,30 @@ export default function Routes({ appProps }) {
           exact
           path={ROUTES.QUESTIONS_PAGE}
         />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={TherapistList}
+          exact
+          path={ROUTES.THERAPIST_LIST_PAGE}
+        />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={TherapistDetails}
+          exact
+          path={ROUTES.THERAPIST_DETAILS_PAGE}
+        />
         <Switch>
           <AuthenticatedRoute
             appProps={appProps}
             component={Dashboard}
             exact
             path={ROUTES.DASHBOARD_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={SupportGroup}
+            exact
+            path={ROUTES.SUPPORT_GROUP_PAGE}
           />
           <Route component={NotFound} />
         </Switch>
