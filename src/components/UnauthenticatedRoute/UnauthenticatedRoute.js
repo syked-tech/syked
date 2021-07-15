@@ -26,12 +26,7 @@ export default function UnauthenticatedRoute({ component: C, appProps, ...rest }
     <Route
       {...rest}
       render={(props) => {
-        if (appProps.isAuthenticated) {
-          // !appProps.isAuthenticated ? (
-          //   <C {...props} {...appProps} />
-          // ) : (
-          //   <Redirect to={redirect === '' || redirect === null ? '/' : redirect} />
-          // )
+        if (!appProps.isAuthenticated) {
           return <C {...props} {...appProps} />;
         }
         return <Redirect to={redirect === '' || redirect === null ? '/' : redirect} />;

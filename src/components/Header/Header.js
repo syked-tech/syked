@@ -63,7 +63,7 @@ export default function Header({ isAuthenticated = false }) {
     }
   };
 
-  const isDash = pathname === ROUTES.DASHBOARD_PAGE;
+  const isDash = [ROUTES.DASHBOARD_PAGE, ROUTES.EDIT_PROFILE_PAGE].includes(pathname);
 
   return (
     <div className={classes.root}>
@@ -147,7 +147,9 @@ export default function Header({ isAuthenticated = false }) {
                             <NavLink
                               exact
                               onClick={handleClick}
-                              className={`${trigger ? 'alt-nav-link' : null} nav-link`}
+                              className={`${trigger ? 'alt-nav-link' : null} nav-link ${
+                                isDash && 'active'
+                              }`}
                               to={ROUTES.DASHBOARD_PAGE}>
                               My Account
                             </NavLink>

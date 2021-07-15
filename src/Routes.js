@@ -11,7 +11,7 @@ import Home from 'containers/Home';
 import Contact from 'containers/Contact';
 import LogIn from 'containers/Auth/LogIn';
 import SignUp from 'containers/Auth/SignUp';
-import Dashboard from 'containers/Dashboard';
+import Dashboard from 'containers/Account/Dashboard';
 import Questions from 'containers/Questions';
 import SupportGroup from 'containers/SupportGroup';
 import TherapistList from 'containers/Therapist/TherapistList';
@@ -34,25 +34,20 @@ export default function Routes({ appProps }) {
           exact
           path={ROUTES.SIGN_UP_PAGE}
         />
-        <UnauthenticatedRoute
-          appProps={appProps}
-          component={Contact}
-          exact
-          path={ROUTES.CONTACT_PAGE}
-        />
-        <UnauthenticatedRoute
+        <AppliedRoute appProps={appProps} component={Contact} exact path={ROUTES.CONTACT_PAGE} />
+        <AppliedRoute
           appProps={appProps}
           component={Questions}
           exact
           path={ROUTES.QUESTIONS_PAGE}
         />
-        <UnauthenticatedRoute
+        <AppliedRoute
           appProps={appProps}
           component={TherapistList}
           exact
           path={ROUTES.THERAPIST_LIST_PAGE}
         />
-        <UnauthenticatedRoute
+        <AppliedRoute
           appProps={appProps}
           component={TherapistDetails}
           exact
@@ -64,6 +59,12 @@ export default function Routes({ appProps }) {
             component={Dashboard}
             exact
             path={ROUTES.DASHBOARD_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.EDIT_PROFILE_PAGE}
           />
           <AuthenticatedRoute
             appProps={appProps}

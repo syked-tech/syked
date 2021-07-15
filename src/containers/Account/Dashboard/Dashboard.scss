@@ -1066,3 +1066,15 @@ ul.side_bar {
       }
   }
 }
+
+.share-buttons {
+  display: flex;
+  max-width: 200px;
+  flex-wrap: wrap;
+  button {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 5px !important;
+    overflow: hidden;
+  }
+}
