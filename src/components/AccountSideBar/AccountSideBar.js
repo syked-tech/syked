@@ -37,6 +37,11 @@ const MenuList = ({ userType }) => {
             </NavLink>
           </li>
           <li has="customer">
+            <NavLink to={ROUTES.CHANGE_PASSWORD_PAGE} activeClassName="active">
+              <FontAwesomeIcon icon={faLock} /> Change Password
+            </NavLink>
+          </li>
+          <li has="customer">
             <NavLink to={ROUTES.NOTIFICATION_PAGE} activeClassName="active">
               <FontAwesomeIcon icon={faBell} /> Notification List
               <span className="count chat_count">1</span>
@@ -114,7 +119,7 @@ function AccountSideBar({ signOut, userType }) {
   // eslint-disable-next-line no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies([ROUTES.JWT_NAME]);
   return (
-    <div className="deatail_box p-0">
+    <div className="deatail_box p-0 mb-5">
       <h3 className="p-3 mb-0">My Account</h3>
       <ul className="side_bar p-0">
         <MenuList userType={userType} />

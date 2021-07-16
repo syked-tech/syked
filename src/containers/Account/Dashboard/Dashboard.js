@@ -11,6 +11,14 @@ import Footer from 'components/Footer';
 import AccountSideBar from 'components/AccountSideBar';
 import Profile from 'containers/Account/Profile';
 import EditProfile from 'containers/Account/EditProfile';
+import BankInfo from 'containers/Account/BankInfo';
+import Bookings from 'containers/Account/Bookings';
+import ChangePassword from 'containers/Account/ChangePassword';
+import Notifications from 'containers/Account/Notifications';
+import Diary from 'containers/Account/Diary';
+import Assessment from 'containers/Account/Assessment';
+import Library from 'containers/Account/Library';
+import Exercise from 'containers/Account/Exercise';
 import * as ROUTES from 'common/constants';
 
 import './Dashboard.scss';
@@ -27,6 +35,46 @@ function Dashboard() {
       path: ROUTES.EDIT_PROFILE_PAGE,
       exact: true,
       component: () => <EditProfile />,
+    },
+    {
+      path: ROUTES.EDIT_BANK_INFO_PAGE,
+      exact: true,
+      component: () => <BankInfo />,
+    },
+    {
+      path: ROUTES.BOOKINGS_PAGE,
+      exact: true,
+      component: () => <Bookings />,
+    },
+    {
+      path: ROUTES.CHANGE_PASSWORD_PAGE,
+      exact: true,
+      component: () => <ChangePassword />,
+    },
+    {
+      path: ROUTES.NOTIFICATION_PAGE,
+      exact: true,
+      component: () => <Notifications />,
+    },
+    {
+      path: ROUTES.DIARY_PAGE,
+      exact: true,
+      component: () => <Diary />,
+    },
+    {
+      path: ROUTES.ASSESMENT_PAGE,
+      exact: true,
+      component: () => <Assessment />,
+    },
+    {
+      path: ROUTES.LIBRARY_PAGE,
+      exact: true,
+      component: () => <Library />,
+    },
+    {
+      path: ROUTES.EXERCISE_PAGE,
+      exact: true,
+      component: () => <Exercise />,
     },
   ];
 

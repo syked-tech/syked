@@ -16,6 +16,7 @@ import Questions from 'containers/Questions';
 import SupportGroup from 'containers/SupportGroup';
 import TherapistList from 'containers/Therapist/TherapistList';
 import TherapistDetails from 'containers/Therapist/TherapistDetails';
+import Order from 'containers/Order';
 
 export default function Routes({ appProps }) {
   return (
@@ -68,9 +69,69 @@ export default function Routes({ appProps }) {
           />
           <AuthenticatedRoute
             appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.EDIT_BANK_INFO_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.BOOKINGS_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.CHANGE_PASSWORD_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.NOTIFICATION_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.DIARY_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.ASSESMENT_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.LIBRARY_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.EDIT_BANK_INFO_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.EXERCISE_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
             component={SupportGroup}
             exact
             path={ROUTES.SUPPORT_GROUP_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Order}
+            exact
+            path={ROUTES.THERAPIST_ORDER_PAGE}
           />
           <Route component={NotFound} />
         </Switch>

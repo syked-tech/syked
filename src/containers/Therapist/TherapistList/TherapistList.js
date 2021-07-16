@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useParams, Link } from 'react-router-dom';
 import { selectIsAuthenticated } from 'containers/Auth/authSlice';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -87,6 +88,9 @@ const therapists = [
 ];
 
 export default function TherapistList() {
+  const { score } = useParams();
+  // eslint-disable-next-line no-console
+  console.log('score ', score);
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   return (
@@ -114,7 +118,7 @@ export default function TherapistList() {
                     if="let therapist_list of therapistList;">
                     <div className="d-sm-flex align-items-md-center">
                       <div className="pro-img">
-                        <img src="therapist_list.profile_image" alt="profile" />
+                        <img src="assets/img/user.png" alt="profile" />
                       </div>
                       <div className="content_list w-100 pt-3 pt-sm-0 pl-sm-3">
                         <div className="d-sm-flex align-items-center justify-content-between mb-2">
@@ -133,9 +137,12 @@ export default function TherapistList() {
                         {item.about_me ? <p>about_me</p> : null}
                         <div className="pt-2 d-md-flex align-items-center justify-content-between">
                           <div className="mb-2 mb-md-0 d-flex align-items-center">
-                            <a href="#0" title="Edit Profile" className="btn btn-green mr-2">
+                            <Link
+                              to={`/therapist/detail/${item.unic_id}`}
+                              title="Edit Profile"
+                              className="btn btn-green mr-2">
                               Continue
-                            </a>
+                            </Link>
                             <button type="button" className="btn btn-green">
                               View Reviews
                             </button>

@@ -60,6 +60,97 @@
   font-style: normal;
 }
 
+
+.loader {
+	position: fixed;
+	z-index: 9;
+	background: rgba(0, 0, 0, 0.60);
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	img {
+		max-width: 100px;
+	}
+
+}
+
+.star-icon {
+	font-size: 40px !important;
+	color: #a7a4a4 !important;
+	&:before {
+		color: $green !important;
+	}
+
+}
+
+.cal-text-cent {
+	text-align: center;
+	font-weight: bold;
+}
+
+.avl-bg-cal {
+	background: green;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.cal-day-selected {
+	background-color: #ff9900 !important;
+	border-color: #ff9900 !important;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.book-bg-cal {
+	background: #d8d2d2;
+	text-align: center;
+	font-weight: bold;
+	cursor: not-allowed;
+}
+
+.fc-axis, .fc-time {
+	display: none !important;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+
+	li {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+}
+
+.fc-time-grid-event.fc-short .fc-time, .fc-time-grid-event.fc-short .fc-title {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.fc-event-main {
+  b {
+    display: none;
+  }
+  i {
+    font-style: normal;
+    font-size: .85em;
+    padding: 0;
+  }
+}
+
 body {
 	font-family: $font-rg;
 	font-size: 14px !important;
@@ -859,6 +950,166 @@ body {
 						background: #bac866;
 					}
 
+				}
+
+			}
+
+		}
+
+	}
+
+}
+
+.request {
+	.my_request {
+		box-shadow: 0 5px 12px rgba(0, 0, 0, 0.14);
+		background: $white;
+		width: 100%;
+		border-radius: 5px;
+
+		@media screen and (max-width: $mob) {
+			text-align: center;
+		}
+
+		h5 {
+			margin: 0 0 10px;
+			font-size: 14px;
+			font-family: "Roboto Slab";
+      font-weight: 600;
+		}
+
+		h6 {
+			margin-bottom: 10px;
+			font-size: 14px;
+		}
+
+		.btn-pending {
+			background: $yellow;
+			color: $white;
+			padding: 1px 8px;
+			display: inline-block;
+		}
+
+		.btn-cancel, .btn-complete, .btn-confirmed {
+			color: $white;
+			padding: 1px 8px;
+			display: inline-block;
+		}
+
+		.pro-img {
+			height: 80px;
+			width: 80px;
+			border-radius: 50%;
+			min-width: 80px;
+			overflow: hidden;
+
+			@media screen and (max-width:$mob) {
+				margin: 0 auto;
+			}
+
+			img {
+				height: 100%;
+				width: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+
+		}
+
+		.therapist_type_img {
+			// width: 43px;
+			// height: 38px;
+			// background: #7e7b7be0;
+			// margin-right: 24px;
+			// border-radius: 4px;
+
+			.fa-male {
+				margin-right: 0.5rem;
+			}
+
+		}
+
+	}
+
+	.cancel_btn {
+		background: #e76d6d;
+		border-radius: 3px;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		padding: 8px 35px;
+		color: $white;
+		margin: 0 5px;
+
+		@media screen and (max-width:$mob) {
+			padding: 6px 7px;
+			font-size: 14px;
+		}
+
+	}
+
+	.accept_btn {
+		background: #72a154;
+		border-radius: 3px;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		padding: 8px 35px;
+		color: $white;
+		margin: 0 5px;
+	}
+
+	.confirm_btn {
+		background: #003e7e;
+		border-radius: 3px;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		padding: 8px 35px;
+		color: $white;
+		margin: 0 5px;
+	}
+
+	h4 {
+		border-bottom: 1px solid rgba($black, 0.08);
+		padding-bottom: 12px;
+		margin-bottom: 12px;
+		font-size: 20px;
+
+		@media screen and (max-width:$mob) {
+			text-align: center;
+		}
+
+	}
+
+	.side_bar_right {
+		ul {
+			position: relative;
+
+			&:after {
+				position: absolute;
+				left: 12px;
+				content: "";
+				height: 80%;
+				width: 1px;
+				top: 3px;
+				border-left: 1px dashed $green;
+				z-index: 0;
+			}
+
+			li {
+				position: relative;
+				margin: 0;
+				padding: 0 0 20px 45px;
+				list-style: none;
+
+				span.left_bullet {
+					border: 2px solid $green;
+					background: $green;
+					height: 25px;
+					width: 25px;
+					border-radius: 50%;
+					position: absolute;
+					left: 0;
+					text-align: center;
+					font-size: 14px;
+					font-weight: 900;
+					z-index: 3;
+					color: $white;
 				}
 
 			}

@@ -63,7 +63,20 @@ export default function Header({ isAuthenticated = false }) {
     }
   };
 
-  const isDash = [ROUTES.DASHBOARD_PAGE, ROUTES.EDIT_PROFILE_PAGE].includes(pathname);
+  const isDash = [
+    ROUTES.DASHBOARD_PAGE,
+    ROUTES.EDIT_PROFILE_PAGE,
+    ROUTES.BOOKINGS_PAGE,
+    ROUTES.EDIT_BANK_INFO_PAGE,
+    ROUTES.CHANGE_PASSWORD_PAGE,
+    ROUTES.THERAPIST_ORDER_PAGE,
+    ROUTES.NOTIFICATION_PAGE,
+    ROUTES.DIARY_PAGE,
+    ROUTES.ASSESMENT_PAGE,
+    ROUTES.LIBRARY_PAGE,
+    ROUTES.EDIT_BANK_INFO_PAGE,
+    ROUTES.EXERCISE_PAGE,
+  ].includes(pathname);
 
   return (
     <div className={classes.root}>

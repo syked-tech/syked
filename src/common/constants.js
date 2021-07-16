@@ -7,7 +7,7 @@ export const FORGOT_PASSWORD_PAGE = '/forgot-password';
 export const TERMS_PAGE = '/terms';
 export const PRIVACY_PAGE = '/privacy';
 export const QUESTIONS_PAGE = '/questions';
-export const THERAPIST_LIST_PAGE = '/therapist/list';
+export const THERAPIST_LIST_PAGE = '/therapist/list/:score';
 export const THERAPIST_DETAILS_PAGE = '/therapist/detail/:id';
 export const THERAPIST_ORDER_PAGE = '/order';
 

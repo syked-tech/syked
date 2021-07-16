@@ -1,12 +1,16 @@
 /* eslint-disable camelcase */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { compose } from 'redux';
+import { useSelector, connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Slide from '@material-ui/core/Slide';
+import { Field } from 'react-final-form';
 import { selectIsAuthenticated } from 'containers/Auth/authSlice';
+import FormStateToRedux from 'common/util/FormStateToRedux';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-
+import Wizard from 'components/QuestionsWizard';
 import bookbg from 'common/booking_bg.jpg';
 import './Questions.scss';
 
@@ -333,6 +337,16 @@ const convertToArray = (val) => {
   return Object.keys(keys).map((item, index) => keys[index]);
 };
 
+const Error = ({ name }) => (
+  <Field
+    name={name}
+    subscription={{ touched: true, error: true }}
+    render={({ meta: { touched, error } }) =>
+      touched && error ? <div className="text-danger mb-2">{error}</div> : null
+    }
+  />
+);
+
 const QuestionSet = ({ question }) => {
   const { question_type, options, id } = question;
 
@@ -348,10 +362,11 @@ const QuestionSet = ({ question }) => {
         <div className="mt-3 my-radio">
           <div htmlFor="let obj of convertArray(index.options)">
             {convertToArray(options).map((item) => (
-              <div className="mt-3 my-radio" key={item.option}>
-                <input
+              <div className="mt-3 mb-3 my-radio" key={item.option}>
+                <Field
                   name={`question${id}`}
                   id={item.option}
+                  component="input"
                   className="form-check-input"
                   type="radio"
                   value={item.score}
@@ -399,24 +414,15 @@ const QuestionSet = ({ question }) => {
 };
 
 function Questions() {
+  const history = useHistory();
   const isAuthenticated = useSelector(selectIsAuthenticated);
-  const [questionsIndex] = useState(questions.map((item) => item.id));
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(questionsIndex[0]);
-  const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    setActiveQuestionIndex(questionsIndex[activeIndex]);
-  }, [activeIndex]);
+  const onSubmit = (values) => {
+    const score = Object.keys(values).map((index) => parseInt(values[index], 10));
+    const totalScore = score.reduce((accumulator, prod) => accumulator + prod, 0);
+    history.push(`/therapist/list/${totalScore}`);
+  };
 
-  const onNext = () => {
-    setActiveIndex(activeIndex + 1);
-  };
-  const onContinue = () => {};
-  const onBack = () => {
-    if (activeIndex > 0) {
-      setActiveIndex(activeIndex - 1);
-    }
-  };
   return (
     <>
       <Header isAuthenticated={isAuthenticated} />
@@ -431,13 +437,18 @@ function Questions() {
               </div>
             </div>
             <div className="col-12 col-md-6 col-lg-6">
-              {questions.map((item) => (
-                <div key={item.id}>
-                  {item.id === activeQuestionIndex && (
-                    <div
-                      className="booking_prefer"
-                      id={item.id}
-                      if="activeQuestionIndex == index.id ">
+              <Wizard onSubmit={onSubmit}>
+                {questions.map((item) => (
+                  <Wizard.Page
+                    key={item.id}
+                    validate={(values) => {
+                      const errors = {};
+                      if (!values[`question${item.id}`]) {
+                        errors[`question${item.id}`] = 'This question is mandatory';
+                      }
+                      return errors;
+                    }}>
+                    <div>
                       <Slide direction="left" in mountOnEnter unmountOnExit>
                         <div>
                           <div className="border-bottom">
@@ -448,51 +459,17 @@ function Questions() {
                             </p>
                           </div>
                           <div className="step_form">
-                            <form>
-                              <h5 className="pt-4">{item.question}</h5>
-                              <QuestionSet question={item} />
-                              <span style={{ color: 'red' }}>This question is mandatory</span>
-                            </form>
-                            <button
-                              onClick={onBack}
-                              type="button"
-                              if="onQuestion != 0"
-                              className="btn btn-f-prev">
-                              Back
-                            </button>
-                            {activeIndex === questionsIndex.length - 1 ? (
-                              <button
-                                type="button"
-                                onClick={onContinue}
-                                if="onQuestion == lastQuestion"
-                                className="btn btn-f-next">
-                                Continue
-                              </button>
-                            ) : (
-                              <button
-                                type="button"
-                                onClick={onNext}
-                                if="onQuestion < lastQuestion"
-                                className="btn btn-f-next">
-                                Next
-                              </button>
-                            )}
-                          </div>
-                          <div className="booking_msg mt-3">
-                            <div className="msg">
-                              <img src="assets/img/th_pro_img.png" alt="pro" />
-                            </div>
-                            <p>
-                              Hi, I’ll be guiding you through this quick assessment that will help
-                              me pair you with a suitable therapist.
-                            </p>
+                            <h5 className="pt-4">{item.question}</h5>
+                            <QuestionSet question={item} />
+                            <Error name={`question${item.id}`} />
                           </div>
                         </div>
                       </Slide>
                     </div>
-                  )}
-                </div>
-              ))}
+                    <FormStateToRedux form="QUESTIONS_FORM" />
+                  </Wizard.Page>
+                ))}
+              </Wizard>
             </div>
           </div>
         </div>
@@ -502,8 +479,22 @@ function Questions() {
   );
 }
 
+Questions.propTypes = {};
+
 QuestionSet.propTypes = {
   question: PropTypes.object,
 };
 
-export default Questions;
+Error.propTypes = {
+  name: PropTypes.string,
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(withConnect)(Questions);
