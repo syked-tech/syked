@@ -104,12 +104,15 @@
       margin: 0;
       text-align: left;
       color: $green;
+      display: flex;
+      align-items: center;
 
       .rating {
         margin-left: 5px;
       }
       span {
         color: $black-32;
+        margin-left: 5px;
       }
 
     }

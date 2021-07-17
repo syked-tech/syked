@@ -1,7 +1,13 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect, useSelector } from 'react-redux';
+import { compose } from 'redux';
 import { useParams, Link } from 'react-router-dom';
 import { selectIsAuthenticated } from 'containers/Auth/authSlice';
+import {
+  // selectPreferredTherapists,
+  getTherapistsByScore as getTherapistsByScoreAction,
+} from 'containers/Therapist/therapistSlice';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 
@@ -87,11 +93,14 @@ const therapists = [
   },
 ];
 
-export default function TherapistList() {
+function TherapistList({ getTherapistsByScore }) {
   const { score } = useParams();
-  // eslint-disable-next-line no-console
-  console.log('score ', score);
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  // const therapists = useSelector(selectPreferredTherapists);
+
+  useEffect(() => {
+    getTherapistsByScore({ score });
+  }, [getTherapistsByScore]);
 
   return (
     <>
@@ -183,3 +192,15 @@ export default function TherapistList() {
     </>
   );
 }
+
+TherapistList.propTypes = {
+  getTherapistsByScore: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getTherapistsByScore: (values) => dispatch(getTherapistsByScoreAction(values)),
+});
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(withConnect)(TherapistList);

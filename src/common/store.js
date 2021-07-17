@@ -6,10 +6,12 @@ import { apiMiddleware } from 'redux-api-middleware';
 import notifications from 'components/Notifier/reducer';
 import finalForm from 'common/util/finalFormDuck';
 import authReducer from 'containers/Auth/authSlice';
+import therapistReducer from 'containers/Therapist/therapistSlice';
 // import customerReducer from 'containers/Customers/customerSlice';
 // import policiesReducer from 'containers/Policies/policiesSlice';
 // import usersReducer from 'containers/Users/usersSlice';
 import authSaga from 'containers/Auth/saga';
+import therapistSaga from 'containers/Therapist/saga';
 // import customerSaga from 'containers/Customers/saga';
 // import policiesSaga from 'containers/Policies/saga';
 // import userSaga from 'containers/Users/saga';
@@ -21,6 +23,7 @@ const rootReducer = combineReducers({
   finalForm,
   notifier: notifications,
   auth: authReducer,
+  therapist: therapistReducer,
   // customer: customerReducer,
   // policy: policiesReducer,
   // user: usersReducer,
@@ -33,7 +36,7 @@ export const store = configureStore({
 });
 
 sagaMiddleware.run(authSaga);
-// sagaMiddleware.run(customerSaga);
+sagaMiddleware.run(therapistSaga);
 // sagaMiddleware.run(policiesSaga);
 // sagaMiddleware.run(userSaga);
 

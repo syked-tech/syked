@@ -1,8 +1,13 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect, useSelector } from 'react-redux';
+import { compose } from 'redux';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import { tns } from 'tiny-slider/src/tiny-slider';
 import './Testimonials.scss';
+import { selectReviews, getReviews as getReviewsAction } from 'containers/Therapist/therapistSlice';
 
 const reviews = [
   {
@@ -65,37 +70,44 @@ const companyImages = [
   { image: 'halocare.png', link: 'https://www.halocare.co.za/' },
 ];
 
-export default function Testimonials() {
+function Testimonials({ getReviews }) {
+  // const reviews = useSelector(selectReviews);
   useEffect(() => {
-    tns({
-      container: '.review_slider',
-      swipeAngle: false,
-      center: true,
-      loop: true,
-      autoplay: true,
-      autoplayTimeout: 8000,
-      mouseDrag: true,
-      controls: false,
-      nav: true,
-      dots: true,
-      navPosition: 'bottom',
-      autoplayButtonOutput: false,
-      autoplayText: false,
-      responsive: {
-        0: {
-          items: 1,
+    getReviews();
+  }, [getReviews]);
+
+  useEffect(() => {
+    if (reviews.length) {
+      tns({
+        container: '.review_slider',
+        swipeAngle: false,
+        center: true,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 8000,
+        mouseDrag: true,
+        controls: false,
+        nav: true,
+        dots: true,
+        navPosition: 'bottom',
+        autoplayButtonOutput: false,
+        autoplayText: false,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          400: {
+            items: 1,
+          },
+          740: {
+            items: 1,
+          },
+          940: {
+            items: 1,
+          },
         },
-        400: {
-          items: 1,
-        },
-        740: {
-          items: 1,
-        },
-        940: {
-          items: 1,
-        },
-      },
-    });
+      });
+    }
     tns({
       container: '.clients_slider',
       swipeAngle: false,
@@ -174,7 +186,6 @@ export default function Testimonials() {
           </Grid>
         </Container>
       </section>
-
       <section className="our_clients">
         <Container maxWidth="md">
           <Grid container justify="center">
@@ -205,3 +216,15 @@ export default function Testimonials() {
     </>
   );
 }
+
+Testimonials.propTypes = {
+  getReviews: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getReviews: () => dispatch(getReviewsAction()),
+});
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(withConnect)(Testimonials);

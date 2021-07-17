@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { useSelector, connect } from 'react-redux';
@@ -7,6 +7,10 @@ import { useHistory } from 'react-router-dom';
 import Slide from '@material-ui/core/Slide';
 import { Field } from 'react-final-form';
 import { selectIsAuthenticated } from 'containers/Auth/authSlice';
+import {
+  // selectQuestions,
+  getQuestions as getQuestionsAction,
+} from 'containers/Therapist/therapistSlice';
 import FormStateToRedux from 'common/util/FormStateToRedux';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -413,9 +417,14 @@ const QuestionSet = ({ question }) => {
   }
 };
 
-function Questions() {
+function Questions({ getQuestions }) {
   const history = useHistory();
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  // const questions = useSelector(selectQuestions);
+
+  useEffect(() => {
+    getQuestions();
+  }, [getQuestions]);
 
   const onSubmit = (values) => {
     const score = Object.keys(values).map((index) => parseInt(values[index], 10));
@@ -479,7 +488,9 @@ function Questions() {
   );
 }
 
-Questions.propTypes = {};
+Questions.propTypes = {
+  getQuestions: PropTypes.func,
+};
 
 QuestionSet.propTypes = {
   question: PropTypes.object,
@@ -492,6 +503,7 @@ Error.propTypes = {
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    getQuestions: () => dispatch(getQuestionsAction()),
   };
 }
 

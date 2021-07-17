@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-alert */
 /* eslint-disable no-restricted-globals */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -14,8 +15,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { selectIsAuthenticated } from 'containers/Auth/authSlice';
+import {
+  getSchedule as getScheduleActions,
+  getTherapist as getTherapistActions,
+} from 'containers/Therapist/therapistSlice';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import { useParams } from 'react-router-dom';
 
 const MenuTabs = withStyles(() => ({
   indicator: {
@@ -112,10 +118,16 @@ const events = [
   },
 ];
 
-export default function TherapistDetails() {
+function TherapistDetails({ getTherapist, getSchedule }) {
+  const { id } = useParams();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const [value, setValue] = React.useState(0);
   const [eventsUp, setEventsUp] = React.useState(events);
+
+  useEffect(() => {
+    getTherapist({ id });
+    getSchedule({ id });
+  }, [getTherapist, getSchedule, id]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -312,3 +324,17 @@ export default function TherapistDetails() {
     </>
   );
 }
+
+TherapistDetails.propTypes = {
+  getTherapist: PropTypes.func,
+  getSchedule: PropTypes.func,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getTherapist: (values) => dispatch(getTherapistActions(values)),
+  getSchedule: (values) => dispatch(getScheduleActions(values)),
+});
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(withConnect)(TherapistDetails);
