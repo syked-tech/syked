@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import SocialButton from 'components/SocialButton';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import * as ROUTES from 'common/constants';
+import * as CONSTANTS from 'common/constants';
 import FormStateToRedux from 'common/util/FormStateToRedux';
 
 import { signIn as signInAction, selectError } from 'containers/Auth/authSlice';
@@ -18,6 +19,15 @@ function LogIn({ signIn }) {
   const error = useSelector(selectError);
   const onSubmit = (values) => {
     signIn(values);
+  };
+  const handleSocialLogin = (user) => {
+    // eslint-disable-next-line no-console
+    console.log(user);
+  };
+
+  const handleSocialLoginFailure = (err) => {
+    // eslint-disable-next-line no-console
+    console.error(err);
   };
   return (
     <>
@@ -34,12 +44,17 @@ function LogIn({ signIn }) {
                       <div className="login_left">
                         <h2 className="mb-3">Login</h2>
                         <div className="mb-4 login_btn d-flex justify-content-between">
-                          <Link disabled to="#0" id="customGBtn" className="btn customGPlusSignIn">
+                          <SocialButton
+                            provider="google"
+                            appId={CONSTANTS.GOOGLE_CLIENT_ID}
+                            onLoginSuccess={handleSocialLogin}
+                            onLoginFailure={handleSocialLoginFailure}
+                            className="btn customGPlusSignIn">
                             <span
                               className="g-icon"
                               style={{ backgroundImage: `url(${GLogo})` }}></span>
                             <span className="buttonGText">Google</span>
-                          </Link>
+                          </SocialButton>
                           <Link disabled to="#0" className="btn">
                             <span>
                               <FontAwesomeIcon icon={faFacebookF} /> Facebook
@@ -73,7 +88,7 @@ function LogIn({ signIn }) {
                         />
                       </div>
                       <div className="form_text row m-0 align-items-center justify-content-between">
-                        <Link to={ROUTES.FORGOT_PASSWORD_PAGE} className="mb-2">
+                        <Link to={CONSTANTS.FORGOT_PASSWORD_PAGE} className="mb-2">
                           Forgot Password?
                         </Link>
                       </div>
@@ -87,7 +102,7 @@ function LogIn({ signIn }) {
                       </div>
                       <div className="mt-3 text-center">
                         <p className="mb-0">
-                          Don’t have an Account? <Link to={ROUTES.SIGN_UP_PAGE}>Sign UP</Link>
+                          Don’t have an Account? <Link to={CONSTANTS.SIGN_UP_PAGE}>Sign UP</Link>
                         </p>
                       </div>
                     </form>

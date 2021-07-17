@@ -32,3 +32,8 @@ export const JWT_NAME = 'jwt';
 export const ENQUEUE_SNACKBAR = 'ENQUEUE_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 export const REMOVE_SNACKBAR = 'REMOVE_SNACKBAR';
+
+// Social
+export const GOOGLE_CLIENT_ID =
+  '261634391776-6f0fe14d47n3fp3apnrsjoj7pe86iut0.apps.googleusercontent.com';
+export const FACEBOOK_APP_ID = '408975823310586';
