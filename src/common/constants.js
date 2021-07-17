@@ -10,8 +10,12 @@ export const QUESTIONS_PAGE = '/questions';
 export const THERAPIST_LIST_PAGE = '/therapist/list/:score';
 export const THERAPIST_DETAILS_PAGE = '/therapist/detail/:id';
 export const THERAPIST_ORDER_PAGE = '/order';
+export const DISCLAIMER_PAGE = '/disclaimer';
 
 // My Account
+export const THERAPIST_PROFILE_PAGE = '/my-account/therapist-profile';
+export const EDIT_THERAPIST_PROFILE_PAGE = '/my-account/therapist-edit-profile';
+
 export const DASHBOARD_PAGE = '/my-account/profile';
 export const EDIT_PROFILE_PAGE = '/my-account/edit-profile';
 export const SCHEDULE_PAGE = '/my-account/schedule';

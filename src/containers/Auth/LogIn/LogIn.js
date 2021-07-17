@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
@@ -6,32 +6,80 @@ import { Link } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
+import { Modal } from 'react-bootstrap';
 import SocialButton from 'components/SocialButton';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import * as CONSTANTS from 'common/constants';
 import FormStateToRedux from 'common/util/FormStateToRedux';
-
-import { signIn as signInAction, selectError } from 'containers/Auth/authSlice';
+import SocialLogin from 'containers/Auth/LogIn/SocialLogin';
+import {
+  signIn as signInAction,
+  googleLogin as googleLoginAction,
+  isLoadingSignIn,
+  selectError,
+} from 'containers/Auth/authSlice';
 import GLogo from 'common/btn_google_light_normal_ios.svg';
 
-function LogIn({ signIn }) {
+function LogIn({ signIn, googleLogin }) {
+  const [show, setShow] = useState(false);
+  const [user, setUser] = useState({});
+  const [loadingSocial, setLoadingSocial] = useState(false);
+
+  useEffect(() => {
+    if (user?.profile) {
+      const {
+        profile: { id, email, firstName, lastName },
+        token: { idToken: token },
+      } = user;
+      const userData = {
+        id,
+        token,
+        email,
+        social_key: id,
+        social_type: 'google',
+        first_name: firstName,
+        last_name: lastName,
+      };
+      setLoadingSocial(false);
+      googleLogin(userData);
+    }
+  }, [user]);
+
+  const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
   const error = useSelector(selectError);
+  const loading = useSelector(isLoadingSignIn);
   const onSubmit = (values) => {
     signIn(values);
   };
-  const handleSocialLogin = (user) => {
-    // eslint-disable-next-line no-console
-    console.log(user);
+  const handleGoogleAuth = (userData) => {
+    setUser(userData);
   };
 
-  const handleSocialLoginFailure = (err) => {
-    // eslint-disable-next-line no-console
-    console.error(err);
+  const handleAuthFailure = (err) => {
+    if (err.name === 'Error') {
+      setLoadingSocial(false);
+    }
   };
+  const handleFacebookAuth = () => {};
+
   return (
     <>
       <Header />
+
+      {loading || loadingSocial ? (
+        <div className="loader">
+          <img src="assets/img/loader.svg" alt="loader" />
+        </div>
+      ) : null}
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Body>
+          <SocialLogin />
+        </Modal.Body>
+      </Modal>
+
       <section className="login pt-5">
         <div className="container pt-5 pb-4">
           <div className="row pt-4 align-items-center">
@@ -47,19 +95,26 @@ function LogIn({ signIn }) {
                           <SocialButton
                             provider="google"
                             appId={CONSTANTS.GOOGLE_CLIENT_ID}
-                            onLoginSuccess={handleSocialLogin}
-                            onLoginFailure={handleSocialLoginFailure}
+                            setLoadingSocial={() => setLoadingSocial(true)}
+                            onLoginSuccess={handleGoogleAuth}
+                            onLoginFailure={handleAuthFailure}
                             className="btn customGPlusSignIn">
                             <span
                               className="g-icon"
                               style={{ backgroundImage: `url(${GLogo})` }}></span>
                             <span className="buttonGText">Google</span>
                           </SocialButton>
-                          <Link disabled to="#0" className="btn">
+                          <SocialButton
+                            provider="facebook"
+                            appId={CONSTANTS.FACEBOOK_APP_ID}
+                            setLoadingSocial={() => setLoadingSocial(true)}
+                            onLoginSuccess={handleFacebookAuth}
+                            onLoginFailure={handleAuthFailure}
+                            className="btn">
                             <span>
                               <FontAwesomeIcon icon={faFacebookF} /> Facebook
                             </span>
-                          </Link>
+                          </SocialButton>
                         </div>
                       </div>
                       {error ? (
@@ -123,10 +178,12 @@ function LogIn({ signIn }) {
 
 LogIn.propTypes = {
   signIn: PropTypes.func,
+  googleLogin: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   signIn: (values) => dispatch(signInAction(values)),
+  googleLogin: (values) => dispatch(googleLoginAction(values)),
 });
 
 const withConnect = connect(null, mapDispatchToProps);

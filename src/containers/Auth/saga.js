@@ -60,6 +60,24 @@ export function* signIn(actions) {
   }
 }
 
+export function* googleLogin(actions) {
+  const body = actions.payload;
+  const options = {
+    url: API.GOOGLE_LOGIN_API,
+    method: 'POST',
+    data: JSON.stringify(body),
+  };
+  try {
+    // eslint-disable-next-line no-unused-vars
+    const authResponse = yield call(axios, options);
+    // console.log(authResponse);
+  } catch (error) {
+    // console.log(error.name);
+    // console.log(error.message);
+    yield put(AuthSlice.googleLoginFailed(error));
+  }
+}
+
 export function* signOut() {
   try {
     const expires = new Date();
@@ -410,6 +428,7 @@ export function* deactivateUser(actions) {
 
 export default function* userSaga() {
   yield takeLatest(AuthSlice.signIn.type, signIn);
+  yield takeLatest(AuthSlice.googleLogin.type, googleLogin);
   yield takeLatest(AuthSlice.signOut.type, signOut);
   yield takeLatest(AuthSlice.signUp.type, signUp);
   yield takeLatest(AuthSlice.confirmSignUp.type, confirmSignUp);

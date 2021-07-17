@@ -33,6 +33,20 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
       state.error = action.payload;
     },
+    googleLogin: (state) => {
+      state.isLoadingSignIn = true;
+      state.error = null;
+    },
+    googleLoginSuccess: (state) => {
+      state.isLoadingSignIn = false;
+      state.isAuthenticated = true;
+      state.error = null;
+    },
+    googleLoginFailed: (state) => {
+      state.isLoadingSignIn = false;
+      state.isAuthenticated = false;
+      // state.error = action.payload;
+    },
     signOut: (state) => {
       state.isLoadingsignOut = true;
     },
@@ -139,6 +153,9 @@ export const {
   signIn,
   signInSuccess,
   signInFailed,
+  googleLogin,
+  googleLoginSuccess,
+  googleLoginFailed,
   signOut,
   signOutSuccess,
   signOutFailed,

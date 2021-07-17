@@ -8,9 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import * as ROUTES from 'common/constants';
+import * as CONSTANTS from 'common/constants';
+
 import FormStateToRedux from 'common/util/FormStateToRedux';
 import { composeValidators, required, mustBeEmail } from 'common/util/Validation';
+import SocialButton from 'components/SocialButton';
 
 import { signUp as signUpAction } from 'containers/Auth/authSlice';
 import GLogo from 'common/btn_google_light_normal_ios.svg';
@@ -27,6 +29,30 @@ function SignUp({ signUp }) {
     kin_number: '',
     used_referral: '',
     group_code: '',
+  };
+  const handleGoogleAuth = (user) => {
+    // eslint-disable-next-line no-console
+    console.log(user);
+    // social_key = userData.id,
+    // social_type = 'google',
+    // first_name = user.profile.firstName,
+    // last_name = user.profile.lastName,
+    // id = user.profile.id,
+    // email = user.profile.email.trim(),
+  };
+
+  const handleGoogleAuthFailure = (err) => {
+    // eslint-disable-next-line no-console
+    console.error(err);
+  };
+  const handleFacebookAuth = (user) => {
+    // eslint-disable-next-line no-console
+    console.log(user);
+  };
+
+  const handleFacebookAuthFailure = (err) => {
+    // eslint-disable-next-line no-console
+    console.error(err);
   };
   return (
     <>
@@ -77,21 +103,27 @@ function SignUp({ signUp }) {
                             </div>
                           </div>
                           <div className="mb-4 login_btn d-flex justify-content-between">
-                            <Link
-                              disabled
-                              to="#0"
-                              id="customGBtn"
+                            <SocialButton
+                              provider="google"
+                              appId={CONSTANTS.GOOGLE_CLIENT_ID}
+                              onLoginSuccess={handleGoogleAuth}
+                              onLoginFailure={handleGoogleAuthFailure}
                               className="btn customGPlusSignIn">
                               <span
                                 className="g-icon"
                                 style={{ backgroundImage: `url(${GLogo})` }}></span>
                               <span className="buttonGText">Google</span>
-                            </Link>
-                            <Link disabled to="#0" className="btn">
+                            </SocialButton>
+                            <SocialButton
+                              provider="facebook"
+                              appId={CONSTANTS.FACEBOOK_APP_ID}
+                              onLoginSuccess={handleFacebookAuth}
+                              onLoginFailure={handleFacebookAuthFailure}
+                              className="btn">
                               <span>
                                 <FontAwesomeIcon icon={faFacebookF} /> Facebook
                               </span>
-                            </Link>
+                            </SocialButton>
                           </div>
                         </div>
                       </div>
@@ -264,11 +296,11 @@ function SignUp({ signUp }) {
                       <div className="form_text">
                         <p>
                           By signing up you agree to our
-                          <Link target="_blank" to={ROUTES.TERMS_PAGE}>
+                          <Link target="_blank" to={CONSTANTS.TERMS_PAGE}>
                             Terms of Service.
                           </Link>
                           <span>and </span>
-                          <Link target="_blank" to={ROUTES.PRIVACY_PAGE}>
+                          <Link target="_blank" to={CONSTANTS.PRIVACY_PAGE}>
                             Privacy Policy
                           </Link>
                         </p>
@@ -282,7 +314,7 @@ function SignUp({ signUp }) {
                         </button>
                       </div>
                       <div className="text-center mt-3">
-                        <Link to={ROUTES.ROOT}>Back To Home</Link>
+                        <Link to={CONSTANTS.ROOT}>Back To Home</Link>
                       </div>
                     </form>
                   )}

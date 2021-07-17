@@ -10,3 +10,4 @@ export const THERAPIST_DETAILS_API = `${BASE_URL}/customers/v1/customer/therapis
 export const THERAPIST_SCORE_API = `${BASE_URL}/customer/therapists?score=`;
 export const REVIEWS_API = `${BASE_URL}/customers/home-reviews`;
 export const QUESTIONS_API = `${BASE_URL}/customers/customer/question-list`;
+export const GOOGLE_LOGIN_API = `${BASE_URL}/customer/google-login`;

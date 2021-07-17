@@ -6,9 +6,13 @@ import SocialLogin from 'react-social-login';
 // eslint-disable-next-line react/prefer-stateless-function
 class SocialButton extends React.Component {
   render() {
-    const { children, triggerLogin, ...props } = this.props;
+    const { children, triggerLogin, setLoadingSocial, ...props } = this.props;
+    const click = () => {
+      triggerLogin();
+      setLoadingSocial();
+    };
     return (
-      <button type="button" onClick={triggerLogin} {...props}>
+      <button type="button" onClick={click} {...props}>
         {children}
       </button>
     );
@@ -16,6 +20,7 @@ class SocialButton extends React.Component {
 }
 
 SocialButton.propTypes = {
+  setLoadingSocial: PropTypes.func,
   triggerLogin: PropTypes.any,
   children: PropTypes.any,
 };
