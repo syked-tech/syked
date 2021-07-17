@@ -12,7 +12,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import * as CONSTANTS from 'common/constants';
 import FormStateToRedux from 'common/util/FormStateToRedux';
-import SocialLogin from 'containers/Auth/LogIn/SocialLogin';
+import SocialLogin from 'containers/Auth/SocialLogin';
 import {
   signIn as signInAction,
   googleLogin as googleLoginAction,
@@ -47,7 +47,6 @@ function LogIn({ signIn, googleLogin }) {
   }, [user]);
 
   const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
   const error = useSelector(selectError);
   const loading = useSelector(isLoadingSignIn);
   const onSubmit = (values) => {
@@ -56,13 +55,16 @@ function LogIn({ signIn, googleLogin }) {
   const handleGoogleAuth = (userData) => {
     setUser(userData);
   };
+  const handleFacebookAuth = (userData) => {
+    // eslint-disable-next-line no-console
+    console.log(userData);
+  };
 
   const handleAuthFailure = (err) => {
     if (err.name === 'Error') {
       setLoadingSocial(false);
     }
   };
-  const handleFacebookAuth = () => {};
 
   return (
     <>
