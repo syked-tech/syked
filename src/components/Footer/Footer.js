@@ -1,8 +1,10 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import * as CONSTANTS from 'common/constants';
 import './Footer.scss';
 
 export default function Footer() {
@@ -24,25 +26,25 @@ export default function Footer() {
             <h4>Bottom of the page</h4>
             <ul>
               <li>
-                <a href="#home">Home</a>
+                <Link to={CONSTANTS.ROOT}>Home</Link>
               </li>
               <li>
-                <a href="#Our Therapist">Our Professionals</a>
+                <Link to={`${CONSTANTS.ROOT}#professionals-section`}>Our Professionals</Link>
               </li>
               <li>
-                <a href="#how-work">How it Works</a>
+                <Link to={`${CONSTANTS.ROOT}#how-it-works-setion`}>How it Works</Link>
               </li>
               <li>
-                <a href="/testimonials">Testimonials</a>
+                <Link to={`${CONSTANTS.ROOT}#testimonials-section`}>Testimonials</Link>
               </li>
               <li>
-                <a href="/login">Sign Up /Login</a>
+                <Link to={CONSTANTS.LOGIN_PAGE}>Sign Up /Login</Link>
               </li>
               <li>
-                <a href="/blog">Blog</a>
+                <a href="https://blog.syked.co.za">Blog</a>
               </li>
               <li>
-                <a href="/contact">Contact Us</a>
+                <Link to={CONSTANTS.CONTACT_PAGE}>Contact Us</Link>
               </li>
             </ul>
           </Grid>
@@ -50,13 +52,13 @@ export default function Footer() {
             <h4>Privacy</h4>
             <ul>
               <li>
-                <a href="/terms">Terms and conditions</a>
+                <Link to={CONSTANTS.TERMS_PAGE}>Terms and conditions</Link>
               </li>
               <li>
-                <a href="/privacy">Privacy Policy</a>
+                <Link to={CONSTANTS.PRIVACY_PAGE}>Privacy Policy</Link>
               </li>
               <li>
-                <a href="/faq">FAQ</a>
+                <Link to={CONSTANTS.FAQ_PAGE}>FAQ</Link>
               </li>
             </ul>
           </Grid>

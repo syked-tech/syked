@@ -5,6 +5,7 @@ import * as ROUTES from 'common/constants';
 import AppliedRoute from 'components/AppliedRoute';
 import AuthenticatedRoute from 'components/AuthenticatedRoute';
 import UnauthenticatedRoute from 'components/UnauthenticatedRoute';
+import ScrollToTop from 'components/ScrollToTop';
 
 import NotFound from 'containers/NotFound';
 import Home from 'containers/Home';
@@ -19,10 +20,14 @@ import SupportGroup from 'containers/SupportGroup';
 import TherapistList from 'containers/Therapist/TherapistList';
 import TherapistDetails from 'containers/Therapist/TherapistDetails';
 import Order from 'containers/Order';
+import Terms from 'containers/Terms';
+import Privacy from 'containers/Privacy';
+import FAQ from 'containers/FAQ';
 
 export default function Routes({ appProps }) {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Switch>
         <AppliedRoute exact appProps={appProps} component={Home} path={ROUTES.ROOT} />
         <UnauthenticatedRoute
@@ -68,6 +73,9 @@ export default function Routes({ appProps }) {
           exact
           path={ROUTES.THERAPIST_DETAILS_PAGE}
         />
+        <AppliedRoute appProps={appProps} component={Terms} exact path={ROUTES.TERMS_PAGE} />
+        <AppliedRoute appProps={appProps} component={Privacy} exact path={ROUTES.PRIVACY_PAGE} />
+        <AppliedRoute appProps={appProps} component={FAQ} exact path={ROUTES.FAQ_PAGE} />
         <Switch>
           <AuthenticatedRoute
             appProps={appProps}
