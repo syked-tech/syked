@@ -15,34 +15,40 @@ import FormStateToRedux from 'common/util/FormStateToRedux';
 import SocialLogin from 'containers/Auth/SocialLogin';
 import {
   signIn as signInAction,
-  googleLogin as googleLoginAction,
+  socialLogin as socialLoginAction,
+  resetError as resetErrorAction,
   isLoadingSignIn,
   selectError,
 } from 'containers/Auth/authSlice';
 import GLogo from 'common/btn_google_light_normal_ios.svg';
 
-function LogIn({ signIn, googleLogin }) {
+function LogIn({ signIn, resetError, socialLogin }) {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState({});
   const [loadingSocial, setLoadingSocial] = useState(false);
+
+  useEffect(() => {
+    resetError();
+  }, [resetError]);
 
   useEffect(() => {
     if (user?.profile) {
       const {
         profile: { id, email, firstName, lastName },
         token: { idToken: token },
+        provider,
       } = user;
       const userData = {
         id,
         token,
         email,
         social_key: id,
-        social_type: 'google',
+        social_type: provider,
         first_name: firstName,
         last_name: lastName,
       };
       setLoadingSocial(false);
-      googleLogin(userData);
+      socialLogin(userData);
     }
   }, [user]);
 
@@ -52,12 +58,8 @@ function LogIn({ signIn, googleLogin }) {
   const onSubmit = (values) => {
     signIn(values);
   };
-  const handleGoogleAuth = (userData) => {
+  const handleSocialAuth = (userData) => {
     setUser(userData);
-  };
-  const handleFacebookAuth = (userData) => {
-    // eslint-disable-next-line no-console
-    console.log(userData);
   };
 
   const handleAuthFailure = (err) => {
@@ -98,7 +100,7 @@ function LogIn({ signIn, googleLogin }) {
                             provider="google"
                             appId={CONSTANTS.GOOGLE_CLIENT_ID}
                             setLoadingSocial={() => setLoadingSocial(true)}
-                            onLoginSuccess={handleGoogleAuth}
+                            onLoginSuccess={handleSocialAuth}
                             onLoginFailure={handleAuthFailure}
                             className="btn customGPlusSignIn">
                             <span
@@ -110,7 +112,7 @@ function LogIn({ signIn, googleLogin }) {
                             provider="facebook"
                             appId={CONSTANTS.FACEBOOK_APP_ID}
                             setLoadingSocial={() => setLoadingSocial(true)}
-                            onLoginSuccess={handleFacebookAuth}
+                            onLoginSuccess={handleSocialAuth}
                             onLoginFailure={handleAuthFailure}
                             className="btn">
                             <span>
@@ -120,7 +122,7 @@ function LogIn({ signIn, googleLogin }) {
                         </div>
                       </div>
                       {error ? (
-                        <p style={{ color: 'red' }}>
+                        <p className="text-danger">
                           <span>{error}</span>
                         </p>
                       ) : null}
@@ -180,12 +182,14 @@ function LogIn({ signIn, googleLogin }) {
 
 LogIn.propTypes = {
   signIn: PropTypes.func,
-  googleLogin: PropTypes.func,
+  resetError: PropTypes.func,
+  socialLogin: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
   signIn: (values) => dispatch(signInAction(values)),
-  googleLogin: (values) => dispatch(googleLoginAction(values)),
+  socialLogin: (values) => dispatch(socialLoginAction(values)),
+  resetError: () => dispatch(resetErrorAction()),
 });
 
 const withConnect = connect(null, mapDispatchToProps);

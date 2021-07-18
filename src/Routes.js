@@ -10,6 +10,8 @@ import NotFound from 'containers/NotFound';
 import Home from 'containers/Home';
 import Contact from 'containers/Contact';
 import LogIn from 'containers/Auth/LogIn';
+import ForgotPassword from 'containers/Auth/ForgotPassword';
+import ResetPassword from 'containers/Auth/ResetPassword';
 import SignUp from 'containers/Auth/SignUp';
 import Dashboard from 'containers/Account/Dashboard';
 import Questions from 'containers/Questions';
@@ -28,6 +30,18 @@ export default function Routes({ appProps }) {
           component={LogIn}
           exact
           path={ROUTES.LOGIN_PAGE}
+        />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={ForgotPassword}
+          exact
+          path={ROUTES.FORGOT_PASSWORD_PAGE}
+        />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={ResetPassword}
+          exact
+          path={ROUTES.RESET_PASSWORD_PAGE}
         />
         <UnauthenticatedRoute
           appProps={appProps}

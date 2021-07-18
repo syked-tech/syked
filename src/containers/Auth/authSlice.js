@@ -10,6 +10,7 @@ export const authSlice = createSlice({
     isLoadingSignIn: false,
     isLoadingSignUp: false,
     isAuthenticated: false,
+    isLoadingForgotPassword: false,
     isLoadingResetPassword: false,
     isLoadingConfirmPassword: false,
     isLoadingChangePassword: false,
@@ -33,16 +34,16 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
       state.error = action.payload;
     },
-    googleLogin: (state) => {
+    socialLogin: (state) => {
       state.isLoadingSignIn = true;
       state.error = null;
     },
-    googleLoginSuccess: (state) => {
+    socialLoginSuccess: (state) => {
       state.isLoadingSignIn = false;
       state.isAuthenticated = true;
       state.error = null;
     },
-    googleLoginFailed: (state) => {
+    socialLoginFailed: (state) => {
       state.isLoadingSignIn = false;
       state.isAuthenticated = false;
       // state.error = action.payload;
@@ -65,6 +66,9 @@ export const authSlice = createSlice({
       state.userSession = action.payload;
       // state.user = action.payload.idToken.payload;
     },
+    resetError: (state) => {
+      state.error = null;
+    },
     signUp: (state) => {
       state.isLoadingSignUp = true;
     },
@@ -83,14 +87,29 @@ export const authSlice = createSlice({
     confirmSignUpFailed: (state) => {
       state.isLoadingConfirmSignUp = false;
     },
+    forgotPassword: (state) => {
+      state.isLoadingForgotPassword = true;
+      state.error = null;
+    },
+    forgotPasswordSuccess: (state) => {
+      state.isLoadingForgotPassword = false;
+      state.error = null;
+    },
+    forgotPasswordFailed: (state, action) => {
+      state.isLoadingForgotPassword = false;
+      state.error = action.payload;
+    },
     resetPassword: (state) => {
       state.isLoadingResetPassword = true;
+      state.error = null;
     },
     resetPasswordSuccess: (state) => {
       state.isLoadingResetPassword = false;
+      state.error = null;
     },
-    resetPasswordFailed: (state) => {
+    resetPasswordFailed: (state, action) => {
       state.isLoadingResetPassword = false;
+      state.error = action.payload;
     },
     confirmPassword: (state) => {
       state.isLoadingConfirmPassword = true;
@@ -153,20 +172,24 @@ export const {
   signIn,
   signInSuccess,
   signInFailed,
-  googleLogin,
-  googleLoginSuccess,
-  googleLoginFailed,
+  socialLogin,
+  socialLoginSuccess,
+  socialLoginFailed,
   signOut,
   signOutSuccess,
   signOutFailed,
   userSession,
   userHasAuthenticated,
+  resetError,
   signUp,
   signUpSuccess,
   signUpFailed,
   confirmSignUp,
   confirmSignUpSuccess,
   confirmSignUpFailed,
+  forgotPassword,
+  forgotPasswordSuccess,
+  forgotPasswordFailed,
   resetPassword,
   resetPasswordSuccess,
   resetPasswordFailed,
@@ -196,6 +219,7 @@ export const selectError = (state) => state.auth.error;
 export const isLoadingSignIn = (state) => state.auth.isLoadingSignIn;
 export const isLoadingSignUp = (state) => state.auth.isLoadingSignUp;
 export const isLoadingConfirmSignUp = (state) => state.auth.isLoadingConfirmSignUp;
+export const isLoadingForgotPassword = (state) => state.auth.isLoadingForgotPassword;
 export const isLoadingResetPassword = (state) => state.auth.isLoadingResetPassword;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
 export const isLoadingConfirmPassword = (state) => state.auth.isLoadingConfirmPassword;

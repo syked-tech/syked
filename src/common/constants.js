@@ -4,6 +4,7 @@ export const LOGIN_PAGE = '/login';
 export const SIGN_UP_PAGE = '/sign-up';
 export const VERIFICATION_PAGE = '/mobile-verification';
 export const FORGOT_PASSWORD_PAGE = '/forgot-password';
+export const RESET_PASSWORD_PAGE = '/reset-password/:id/:token';
 export const TERMS_PAGE = '/terms';
 export const PRIVACY_PAGE = '/privacy';
 export const QUESTIONS_PAGE = '/questions';
@@ -39,5 +40,5 @@ export const REMOVE_SNACKBAR = 'REMOVE_SNACKBAR';
 
 // Social
 export const GOOGLE_CLIENT_ID =
-  '261634391776-6f0fe14d47n3fp3apnrsjoj7pe86iut0.apps.googleusercontent.com';
-export const FACEBOOK_APP_ID = '408975823310586';
+  '897086385878-u0mea89ektvjldieh9su81hctr9ldmo4.apps.googleusercontent.com';
+export const FACEBOOK_APP_ID = '365484181588869';

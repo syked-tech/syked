@@ -46,24 +46,14 @@ export function* signIn(actions) {
       yield put(AuthSlice.signInFailed(error));
     }
   } catch (error) {
-    yield put(AuthSlice.signInFailed(error));
-    yield put(
-      enqueueSnackbarAction({
-        message: error.message,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'error',
-          action: () => null,
-        },
-      }),
-    );
+    yield put(AuthSlice.signInFailed(error.name));
   }
 }
 
-export function* googleLogin(actions) {
+export function* socialLogin(actions) {
   const body = actions.payload;
   const options = {
-    url: API.GOOGLE_LOGIN_API,
+    url: body.social_type === 'google' ? API.GOOGLE_LOGIN_API : API.FACEBOOK_LOGIN_API,
     method: 'POST',
     data: JSON.stringify(body),
   };
@@ -74,7 +64,44 @@ export function* googleLogin(actions) {
   } catch (error) {
     // console.log(error.name);
     // console.log(error.message);
-    yield put(AuthSlice.googleLoginFailed(error));
+    yield put(AuthSlice.socialLoginFailed(error));
+  }
+}
+
+export function* signUp(actions) {
+  const body = actions.payload;
+  const options = {
+    url: API.SIGN_UP_API,
+    method: 'POST',
+    data: JSON.stringify(body),
+  };
+  try {
+    const authResponse = yield call(axios, options);
+    yield put(AuthSlice.signUpSuccess(authResponse));
+    // redirect to verify
+    yield put(push(CONSTANTS.VERIFICATION_PAGE));
+    yield put(
+      enqueueSnackbarAction({
+        message: `Confirmation code successfully sent to ${body?.mobile_number}`,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'success',
+          action: () => null,
+        },
+      }),
+    );
+  } catch (error) {
+    yield put(AuthSlice.signUpFailed(error));
+    yield put(
+      enqueueSnackbarAction({
+        message: error.message,
+        options: {
+          key: new Date().getTime() + Math.random(),
+          variant: 'error',
+          action: () => null,
+        },
+      }),
+    );
   }
 }
 
@@ -104,43 +131,6 @@ export function* signOut() {
             vertical: 'top',
             horizontal: 'right',
           },
-          key: new Date().getTime() + Math.random(),
-          variant: 'error',
-          action: () => null,
-        },
-      }),
-    );
-  }
-}
-
-export function* signUp(actions) {
-  const body = actions.payload;
-  const options = {
-    url: API.LOGIN_API,
-    method: 'POST',
-    data: JSON.stringify(body),
-  };
-  try {
-    const authResponse = yield call(axios, options);
-    yield put(AuthSlice.signUpSuccess(authResponse));
-    // redirect to verify
-    yield put(push(CONSTANTS.VERIFICATION_PAGE));
-    yield put(
-      enqueueSnackbarAction({
-        message: `Confirmation code successfully sent to ${body?.mobile_number}`,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'success',
-          action: () => null,
-        },
-      }),
-    );
-  } catch (error) {
-    yield put(AuthSlice.signUpFailed(error));
-    yield put(
-      enqueueSnackbarAction({
-        message: error.message,
-        options: {
           key: new Date().getTime() + Math.random(),
           variant: 'error',
           action: () => null,
@@ -211,25 +201,31 @@ export function* loginSuccessSaga(data) {
   }
 }
 
-export function* resetPassword(actions) {
-  const { Username } = actions.payload;
+export function* forgotPassword(actions) {
+  const options = {
+    url: API.FORGOT_PASSWORD_API,
+    method: 'POST',
+    data: JSON.stringify(actions.payload),
+  };
   try {
-    // eslint-disable-next-line no-undef
-    const authResponse = yield Auth.forgotPassword(Username);
-    yield put(AuthSlice.resetPasswordSuccess(authResponse));
-    // yield put(push(`${CONSTANTS.FORGOT_PASSWORD}/${encodeURIComponent(Username)}`));
+    const authResponse = yield call(axios, options);
+    yield put(AuthSlice.forgotPasswordSuccess(authResponse));
   } catch (error) {
-    yield put(AuthSlice.resetPasswordFailed(error));
-    yield put(
-      enqueueSnackbarAction({
-        message: error.message,
-        options: {
-          key: new Date().getTime() + Math.random(),
-          variant: 'error',
-          action: () => null,
-        },
-      }),
-    );
+    yield put(AuthSlice.forgotPasswordFailed(error.message));
+  }
+}
+
+export function* resetPassword(actions) {
+  const options = {
+    url: API.RESET_PASSWORD_API,
+    method: 'POST',
+    data: JSON.stringify(actions.payload),
+  };
+  try {
+    const authResponse = yield call(axios, options);
+    yield put(AuthSlice.resetPasswordSuccess(authResponse));
+  } catch (error) {
+    yield put(AuthSlice.resetPasswordFailed(error.message));
   }
 }
 
@@ -428,10 +424,11 @@ export function* deactivateUser(actions) {
 
 export default function* userSaga() {
   yield takeLatest(AuthSlice.signIn.type, signIn);
-  yield takeLatest(AuthSlice.googleLogin.type, googleLogin);
+  yield takeLatest(AuthSlice.socialLogin.type, socialLogin);
   yield takeLatest(AuthSlice.signOut.type, signOut);
   yield takeLatest(AuthSlice.signUp.type, signUp);
   yield takeLatest(AuthSlice.confirmSignUp.type, confirmSignUp);
+  yield takeLatest(AuthSlice.forgotPassword.type, forgotPassword);
   yield takeLatest(AuthSlice.resetPassword.type, resetPassword);
   yield takeLatest(AuthSlice.confirmPassword.type, confirmPassword);
   yield takeLatest(AuthSlice.changePassword.type, changePassword);

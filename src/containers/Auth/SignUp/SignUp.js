@@ -18,32 +18,38 @@ import {
   selectError,
   isLoadingSignUp,
   signUp as signUpAction,
-  googleLogin as googleLoginAction,
+  resetError as resetErrorAction,
+  socialLogin as socialLoginAction,
 } from 'containers/Auth/authSlice';
 import GLogo from 'common/btn_google_light_normal_ios.svg';
 
-function SignUp({ signUp, googleLogin }) {
+function SignUp({ signUp, socialLogin, resetError }) {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState({});
   const [loadingSocial, setLoadingSocial] = useState(false);
+
+  useEffect(() => {
+    resetError();
+  }, [resetError]);
 
   useEffect(() => {
     if (user?.profile) {
       const {
         profile: { id, email, firstName, lastName },
         token: { idToken: token },
+        provider,
       } = user;
       const userData = {
         id,
         token,
         email,
         social_key: id,
-        social_type: 'google',
+        social_type: provider,
         first_name: firstName,
         last_name: lastName,
       };
       setLoadingSocial(false);
-      googleLogin(userData);
+      socialLogin(userData);
     }
   }, [user]);
 
@@ -63,13 +69,8 @@ function SignUp({ signUp, googleLogin }) {
     used_referral: '',
     group_code: '',
   };
-  const handleGoogleAuth = (userData) => {
+  const handleSocialAuth = (userData) => {
     setUser(userData);
-  };
-
-  const handleFacebookAuth = (userData) => {
-    // eslint-disable-next-line no-console
-    console.log(userData);
   };
 
   const handleAuthFailure = (err) => {
@@ -103,6 +104,27 @@ function SignUp({ signUp, googleLogin }) {
                   onSubmit={onSubmit}
                   initialValues={initialValues}
                   subscription={{ values: true, submitting: true, pristine: true }}
+                  validate={(values) => {
+                    const errors = {};
+                    if (!values.first_name) {
+                      errors.first_name = 'First name is required';
+                    }
+                    if (!values.last_name) {
+                      errors.last_name = 'Last name is required';
+                    }
+                    if (!values.password) {
+                      errors.password = 'Password is required';
+                    }
+                    if (values?.password?.length < 6) {
+                      errors.password = 'The Password length must be at least 6 characters.';
+                    }
+                    if (!values.confirmPassword) {
+                      errors.confirmPassword = 'Confirm password is required';
+                    } else if (values.confirmPassword !== values.password) {
+                      errors.confirmPassword = 'Confirm password does not match.';
+                    }
+                    return errors;
+                  }}
                   render={({ handleSubmit, form, submitting, pristine, values }) => (
                     <form onSubmit={handleSubmit}>
                       <FormStateToRedux form="SIGN_UP_FORM" />
@@ -144,7 +166,7 @@ function SignUp({ signUp, googleLogin }) {
                               provider="google"
                               appId={CONSTANTS.GOOGLE_CLIENT_ID}
                               setLoadingSocial={() => setLoadingSocial(true)}
-                              onLoginSuccess={handleGoogleAuth}
+                              onLoginSuccess={handleSocialAuth}
                               onLoginFailure={handleAuthFailure}
                               className="btn customGPlusSignIn">
                               <span
@@ -156,7 +178,7 @@ function SignUp({ signUp, googleLogin }) {
                               provider="facebook"
                               appId={CONSTANTS.FACEBOOK_APP_ID}
                               setLoadingSocial={() => setLoadingSocial(true)}
-                              onLoginSuccess={handleFacebookAuth}
+                              onLoginSuccess={handleSocialAuth}
                               onLoginFailure={handleAuthFailure}
                               className="btn">
                               <span>
@@ -169,18 +191,15 @@ function SignUp({ signUp, googleLogin }) {
                       <div className="form-group">
                         <Field
                           type="text"
-                          placeholder="First Name"
+                          placeholder="First name"
                           className="form-control"
                           maxLength="100"
                           component="input"
-                          validate={required}
                           name="first_name">
                           {({ input, meta: { error, touched }, ...rest }) => (
                             <>
                               <input {...input} {...rest} />
-                              {error && touched && (
-                                <p className="text-danger">{`${rest.placeholder} is ${error}`}</p>
-                              )}
+                              {error && touched && <p className="text-danger">{error}</p>}
                             </>
                           )}
                         </Field>
@@ -190,16 +209,13 @@ function SignUp({ signUp, googleLogin }) {
                           type="text"
                           component="input"
                           className="form-control"
-                          validate={required}
-                          placeholder="Last Name"
+                          placeholder="Last name"
                           name="last_name"
                           maxLength="100">
                           {({ input, meta: { error, touched }, ...rest }) => (
                             <>
                               <input {...input} {...rest} />
-                              {error && touched && (
-                                <p className="text-danger">{`${rest.placeholder} is ${error}`}</p>
-                              )}
+                              {error && touched && <p className="text-danger">{error}</p>}
                             </>
                           )}
                         </Field>
@@ -240,7 +256,7 @@ function SignUp({ signUp, googleLogin }) {
                               component="input"
                               className="form-control"
                               name="mobile_number"
-                              placeholder="Phone Number"
+                              placeholder="Phone number"
                               validate={required}
                               pattern="^(0|[0-9]*)$"
                               minLength="10"
@@ -262,7 +278,6 @@ function SignUp({ signUp, googleLogin }) {
                           type="password"
                           component="input"
                           className="form-control"
-                          validate={required}
                           placeholder="Password"
                           name="password"
                           minLength="6"
@@ -270,9 +285,7 @@ function SignUp({ signUp, googleLogin }) {
                           {({ input, meta: { error, touched }, ...rest }) => (
                             <>
                               <input {...input} {...rest} />
-                              {error && touched && (
-                                <p className="text-danger">{`${rest.placeholder} is ${error}`}</p>
-                              )}
+                              {error && touched && <p className="text-danger">{error}</p>}
                             </>
                           )}
                         </Field>
@@ -282,15 +295,12 @@ function SignUp({ signUp, googleLogin }) {
                           type="password"
                           component="input"
                           className="form-control"
-                          validate={required}
                           placeholder="Confirm Password"
                           name="confirmPassword">
                           {({ input, meta: { error, touched }, ...rest }) => (
                             <>
                               <input {...input} {...rest} />
-                              {error && touched && (
-                                <p className="text-danger">{`${rest.placeholder} is ${error}`}</p>
-                              )}
+                              {error && touched && <p className="text-danger">{error}</p>}
                             </>
                           )}
                         </Field>
@@ -372,13 +382,15 @@ function SignUp({ signUp, googleLogin }) {
 }
 
 SignUp.propTypes = {
+  resetError: PropTypes.func,
   signUp: PropTypes.func,
-  googleLogin: PropTypes.func,
+  socialLogin: PropTypes.func,
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  resetError: () => dispatch(resetErrorAction()),
   signUp: (values) => dispatch(signUpAction(values)),
-  googleLogin: (values) => dispatch(googleLoginAction(values)),
+  socialLogin: (values) => dispatch(socialLoginAction(values)),
 });
 
 const withConnect = connect(null, mapDispatchToProps);
