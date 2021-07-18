@@ -228,6 +228,19 @@ export function* resetPassword(actions) {
     yield put(AuthSlice.resetPasswordFailed(error.message));
   }
 }
+export function* contactUs(actions) {
+  const options = {
+    url: API.CONTACT_US_API,
+    method: 'POST',
+    data: JSON.stringify(actions.payload),
+  };
+  try {
+    const authResponse = yield call(axios, options);
+    yield put(AuthSlice.contactUsSuccess(authResponse));
+  } catch (error) {
+    yield put(AuthSlice.contactUsFailed(error.message));
+  }
+}
 
 export function* confirmPassword(actions) {
   const { Username, SessionCode, NewPassword } = actions.payload;
@@ -427,6 +440,7 @@ export default function* userSaga() {
   yield takeLatest(AuthSlice.socialLogin.type, socialLogin);
   yield takeLatest(AuthSlice.signOut.type, signOut);
   yield takeLatest(AuthSlice.signUp.type, signUp);
+  yield takeLatest(AuthSlice.contactUs.type, contactUs);
   yield takeLatest(AuthSlice.confirmSignUp.type, confirmSignUp);
   yield takeLatest(AuthSlice.forgotPassword.type, forgotPassword);
   yield takeLatest(AuthSlice.resetPassword.type, resetPassword);

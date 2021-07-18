@@ -10,6 +10,7 @@ export const authSlice = createSlice({
     isLoadingSignIn: false,
     isLoadingSignUp: false,
     isAuthenticated: false,
+    isLoadingcontactUs: false,
     isLoadingForgotPassword: false,
     isLoadingResetPassword: false,
     isLoadingConfirmPassword: false,
@@ -77,6 +78,18 @@ export const authSlice = createSlice({
     },
     signUpFailed: (state) => {
       state.isLoadingSignUp = false;
+    },
+    contactUs: (state) => {
+      state.isLoadingcontactUs = true;
+      state.error = null;
+    },
+    contactUsSuccess: (state) => {
+      state.isLoadingcontactUs = false;
+      state.error = null;
+    },
+    contactUsFailed: (state, action) => {
+      state.isLoadingcontactUs = false;
+      state.error = action.payload;
     },
     confirmSignUp: (state) => {
       state.isLoadingConfirmSignUp = true;
@@ -181,6 +194,9 @@ export const {
   userSession,
   userHasAuthenticated,
   resetError,
+  contactUs,
+  contactUsSuccess,
+  contactUsFailed,
   signUp,
   signUpSuccess,
   signUpFailed,
@@ -218,6 +234,7 @@ export const selectUser = (state) => state.auth.user;
 export const selectError = (state) => state.auth.error;
 export const isLoadingSignIn = (state) => state.auth.isLoadingSignIn;
 export const isLoadingSignUp = (state) => state.auth.isLoadingSignUp;
+export const isLoadingcontactUs = (state) => state.auth.isLoadingcontactUs;
 export const isLoadingConfirmSignUp = (state) => state.auth.isLoadingConfirmSignUp;
 export const isLoadingForgotPassword = (state) => state.auth.isLoadingForgotPassword;
 export const isLoadingResetPassword = (state) => state.auth.isLoadingResetPassword;

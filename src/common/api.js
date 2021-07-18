@@ -14,3 +14,4 @@ export const REVIEWS_API = `${BASE_URL}/customers/home-reviews`;
 export const QUESTIONS_API = `${BASE_URL}/customers/customer/question-list`;
 export const GOOGLE_LOGIN_API = `${BASE_URL}/customer/google-login`;
 export const FACEBOOK_LOGIN_API = `${BASE_URL}/customer/facebook-login`;
+export const CONTACT_US_API = `${BASE_URL}/utility_api/contact-us`;
