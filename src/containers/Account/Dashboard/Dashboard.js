@@ -82,7 +82,7 @@ function Dashboard() {
     <>
       <Header isAuthenticated />
       <div className="wrapper top-margin inner_wrap">
-        <Box component="section" className="site_listing site_detail">
+        <Box component="section" className="site_listing site_detail consul-section">
           <Container maxWidth="lg" className="service_section dash">
             <Grid container justify="center" spacing={3}>
               <Grid item xs={12} sm={4} md={3}>

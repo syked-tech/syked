@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form, Field } from 'react-final-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
@@ -17,16 +17,25 @@ import SocialLogin from 'containers/Auth/SocialLogin';
 import {
   selectError,
   isLoadingSignUp,
+  loadVerifyScreen,
   signUp as signUpAction,
   resetError as resetErrorAction,
   socialLogin as socialLoginAction,
 } from 'containers/Auth/authSlice';
 import GLogo from 'common/btn_google_light_normal_ios.svg';
 
-function SignUp({ signUp, socialLogin, resetError }) {
+function SignUp({ signUp, socialLogin, resetError, userEmail }) {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState({});
   const [loadingSocial, setLoadingSocial] = useState(false);
+  const isLoadingVerifyScreen = useSelector(loadVerifyScreen);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (isLoadingVerifyScreen) {
+      history.push(`/mobile-verification/${encodeURIComponent(userEmail)}`);
+    }
+  }, [isLoadingVerifyScreen]);
 
   useEffect(() => {
     resetError();
@@ -385,6 +394,7 @@ SignUp.propTypes = {
   resetError: PropTypes.func,
   signUp: PropTypes.func,
   socialLogin: PropTypes.func,
+  userEmail: PropTypes.string,
 };
 
 const mapDispatchToProps = (dispatch) => ({
@@ -393,6 +403,11 @@ const mapDispatchToProps = (dispatch) => ({
   socialLogin: (values) => dispatch(socialLoginAction(values)),
 });
 
-const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(
+  (state) => ({
+    userEmail: state.finalForm.SIGN_UP_FORM?.values?.email,
+  }),
+  mapDispatchToProps,
+);
 
 export default compose(withConnect)(SignUp);

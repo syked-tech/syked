@@ -2,7 +2,9 @@ export const BASE_URL = 'https://api.syked.xyz';
 
 // Login 🔑
 export const LOGIN_API = `${BASE_URL}/v1/user/login`;
-export const SIGN_UP_API = `${BASE_URL}/auth/v1/user/registration`;
+export const SIGN_UP_API = `${BASE_URL}/customer/registration`;
+export const MOBILE_VERIFY_API = `${BASE_URL}/v1/user/mobile_verify`;
+export const DISCLAIMER_API = `${BASE_URL}/v1/user/disclaimer`;
 export const FORGOT_PASSWORD_API = `${BASE_URL}/customer/forgot-password`;
 export const RESET_PASSWORD_API = `${BASE_URL}/reset-password`;
 export const USERS_API = `${BASE_URL}/auth/v1/user/login`;

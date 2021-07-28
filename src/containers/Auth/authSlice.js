@@ -9,6 +9,11 @@ export const authSlice = createSlice({
     error: null,
     isLoadingSignIn: false,
     isLoadingSignUp: false,
+    isLoadingMobileVerify: false,
+    loadVerifyScreen: false,
+    loadDisclaimerScreen: false,
+    isLoadingDisclaimer: false,
+    isAgreed: false,
     isAuthenticated: false,
     isLoadingcontactUs: false,
     isLoadingForgotPassword: false,
@@ -72,12 +77,42 @@ export const authSlice = createSlice({
     },
     signUp: (state) => {
       state.isLoadingSignUp = true;
+      state.loadVerifyScreen = false;
     },
     signUpSuccess: (state) => {
       state.isLoadingSignUp = false;
+      state.loadVerifyScreen = true;
     },
     signUpFailed: (state) => {
       state.isLoadingSignUp = false;
+      state.loadVerifyScreen = false;
+    },
+    mobileVerify: (state) => {
+      state.isLoadingMobileVerify = true;
+      state.loadDisclaimerScreen = false;
+      state.error = null;
+    },
+    mobileVerifySuccess: (state) => {
+      state.isLoadingMobileVerify = false;
+      state.loadDisclaimerScreen = true;
+      state.error = null;
+    },
+    mobileVerifyFailed: (state, action) => {
+      state.isLoadingMobileVerify = false;
+      state.loadDisclaimerScreen = false;
+      state.error = action.payload;
+    },
+    disclaimer: (state) => {
+      state.isLoadingDisclaimer = true;
+      state.isAgreed = false;
+    },
+    disclaimerSuccess: (state) => {
+      state.isLoadingDisclaimer = false;
+      state.isAgreed = true;
+    },
+    disclaimerFailed: (state) => {
+      state.isLoadingDisclaimer = false;
+      state.isAgreed = false;
     },
     contactUs: (state) => {
       state.isLoadingcontactUs = true;
@@ -200,6 +235,12 @@ export const {
   signUp,
   signUpSuccess,
   signUpFailed,
+  mobileVerify,
+  mobileVerifySuccess,
+  mobileVerifyFailed,
+  disclaimer,
+  disclaimerSuccess,
+  disclaimerFailed,
   confirmSignUp,
   confirmSignUpSuccess,
   confirmSignUpFailed,
@@ -234,6 +275,11 @@ export const selectUser = (state) => state.auth.user;
 export const selectError = (state) => state.auth.error;
 export const isLoadingSignIn = (state) => state.auth.isLoadingSignIn;
 export const isLoadingSignUp = (state) => state.auth.isLoadingSignUp;
+export const loadVerifyScreen = (state) => state.auth.loadVerifyScreen;
+export const loadDisclaimerScreen = (state) => state.auth.loadDisclaimerScreen;
+export const isLoadingMobileVerify = (state) => state.auth.isLoadingMobileVerify;
+export const isLoadingDisclaimer = (state) => state.auth.isLoadingDisclaimer;
+export const isAgreed = (state) => state.auth.isAgreed;
 export const isLoadingcontactUs = (state) => state.auth.isLoadingcontactUs;
 export const isLoadingConfirmSignUp = (state) => state.auth.isLoadingConfirmSignUp;
 export const isLoadingForgotPassword = (state) => state.auth.isLoadingForgotPassword;

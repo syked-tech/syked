@@ -73,13 +73,14 @@ export function* signUp(actions) {
   const options = {
     url: API.SIGN_UP_API,
     method: 'POST',
-    data: JSON.stringify(body),
+    data: JSON.stringify({
+      ...body,
+      mobile_number: `+27${body.mobile_number}`,
+    }),
   };
   try {
     const authResponse = yield call(axios, options);
-    yield put(AuthSlice.signUpSuccess(authResponse));
-    // redirect to verify
-    yield put(push(CONSTANTS.VERIFICATION_PAGE));
+    yield put(AuthSlice.signUpSuccess(authResponse.data));
     yield put(
       enqueueSnackbarAction({
         message: `Confirmation code successfully sent to ${body?.mobile_number}`,
@@ -91,7 +92,7 @@ export function* signUp(actions) {
       }),
     );
   } catch (error) {
-    yield put(AuthSlice.signUpFailed(error));
+    yield put(AuthSlice.signUpFailed(error.name));
     yield put(
       enqueueSnackbarAction({
         message: error.message,
@@ -102,6 +103,83 @@ export function* signUp(actions) {
         },
       }),
     );
+  }
+}
+
+export function* mobileVerify(actions) {
+  const body = actions.payload;
+  const options = {
+    url: API.MOBILE_VERIFY_API,
+    method: 'POST',
+    data: JSON.stringify(body),
+  };
+  try {
+    const authResponse = yield call(axios, options);
+    if (authResponse?.data?.code === 'CodeMismatchException') {
+      yield put(AuthSlice.mobileVerifyFailed(authResponse?.data?.message));
+      yield put(
+        enqueueSnackbarAction({
+          message: authResponse?.data?.message,
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'error',
+            action: () => null,
+          },
+        }),
+      );
+    } else if (authResponse?.data?.code === 'ExpiredCodeException') {
+      yield put(AuthSlice.mobileVerifyFailed(authResponse?.data?.message));
+      yield put(
+        enqueueSnackbarAction({
+          message: authResponse?.data?.message,
+          options: {
+            key: new Date().getTime() + Math.random(),
+            variant: 'error',
+            action: () => null,
+          },
+        }),
+      );
+    } else {
+      yield put(AuthSlice.mobileVerifySuccess(authResponse.data));
+      yield put(push(CONSTANTS.DISCLAIMER_PAGE));
+    }
+  } catch (error) {
+    yield put(AuthSlice.mobileVerifyFailed(error.message));
+    // yield put(
+    //   enqueueSnackbarAction({
+    //     message: error.message,
+    //     options: {
+    //       key: new Date().getTime() + Math.random(),
+    //       variant: 'error',
+    //       action: () => null,
+    //     },
+    //   }),
+    // );
+  }
+}
+
+export function* disclaimer() {
+  const options = {
+    url: API.DISCLAIMER_API,
+    method: 'PUT',
+    data: JSON.stringify({ agree: 'yes' }),
+  };
+  try {
+    const authResponse = yield call(axios, options);
+    // console.log(authResponse);
+    yield put(AuthSlice.disclaimerSuccess(authResponse.data));
+  } catch (error) {
+    yield put(AuthSlice.disclaimerFailed(error.message));
+    // yield put(
+    //   enqueueSnackbarAction({
+    //     message: error.message,
+    //     options: {
+    //       key: new Date().getTime() + Math.random(),
+    //       variant: 'error',
+    //       action: () => null,
+    //     },
+    //   }),
+    // );
   }
 }
 
@@ -440,6 +518,8 @@ export default function* userSaga() {
   yield takeLatest(AuthSlice.socialLogin.type, socialLogin);
   yield takeLatest(AuthSlice.signOut.type, signOut);
   yield takeLatest(AuthSlice.signUp.type, signUp);
+  yield takeLatest(AuthSlice.mobileVerify.type, mobileVerify);
+  yield takeLatest(AuthSlice.disclaimer.type, disclaimer);
   yield takeLatest(AuthSlice.contactUs.type, contactUs);
   yield takeLatest(AuthSlice.confirmSignUp.type, confirmSignUp);
   yield takeLatest(AuthSlice.forgotPassword.type, forgotPassword);

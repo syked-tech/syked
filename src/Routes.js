@@ -14,6 +14,8 @@ import LogIn from 'containers/Auth/LogIn';
 import ForgotPassword from 'containers/Auth/ForgotPassword';
 import ResetPassword from 'containers/Auth/ResetPassword';
 import SignUp from 'containers/Auth/SignUp';
+import MobileVerification from 'containers/Auth/MobileVerification';
+import Disclaimer from 'containers/Auth/Disclaimer';
 import Dashboard from 'containers/Account/Dashboard';
 import Questions from 'containers/Questions';
 import SupportGroup from 'containers/SupportGroup';
@@ -53,6 +55,18 @@ export default function Routes({ appProps }) {
           component={SignUp}
           exact
           path={ROUTES.SIGN_UP_PAGE}
+        />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={MobileVerification}
+          exact
+          path={ROUTES.VERIFICATION_PAGE}
+        />
+        <UnauthenticatedRoute
+          appProps={appProps}
+          component={Disclaimer}
+          exact
+          path={ROUTES.DISCLAIMER_PAGE}
         />
         <AppliedRoute appProps={appProps} component={Contact} exact path={ROUTES.CONTACT_PAGE} />
         <AppliedRoute

@@ -105,8 +105,8 @@ function TherapistList({ getTherapistsByScore }) {
   return (
     <>
       <Header isAuthenticated={isAuthenticated} />
-      <div className="wrapper top-margin inner_wrap">
-        <section className="f7-gray consul-section pt-5 pb-5">
+      <div className="wrapper inner_wrap">
+        <section className="f7-gray consul-section pb-5" style={{ paddingTop: 140 }}>
           {/* <div className="loader" if="therapistList.length <= '0' && loder_show=='yes' ">
             <img src="assets/img/loader.svg" alt="loader" />
           </div> */}
