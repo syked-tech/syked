@@ -38,9 +38,9 @@ export default function Diary() {
               </div>
             </div>
           </div>
-          <div className="text-center" if="notesData.length <= '0' && loder_show == 'no'">
+          {/* <div className="text-center" if="notesData.length <= '0' && loder_show == 'no'">
             No notes yet
-          </div>
+          </div> */}
         </div>
       </div>
     </>

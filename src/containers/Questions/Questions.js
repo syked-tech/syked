@@ -12,6 +12,7 @@ import {
   getQuestions as getQuestionsAction,
 } from 'containers/Therapist/therapistSlice';
 import FormStateToRedux from 'common/util/FormStateToRedux';
+import convertToArray from 'common/util/convertToArray';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import Wizard from 'components/QuestionsWizard';
@@ -335,11 +336,6 @@ const questions = [
     deleted_at: null,
   },
 ];
-
-const convertToArray = (val) => {
-  const keys = JSON.parse(val)[0];
-  return Object.keys(keys).map((item, index) => keys[index]);
-};
 
 const Error = ({ name }) => (
   <Field

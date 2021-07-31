@@ -89,6 +89,31 @@ const bookings = {
   ],
 };
 
+function TherapyType({ type }) {
+  switch (type) {
+    case 'online_therapy':
+      return <b>Online Therapy</b>;
+    case 'marriage_counseling':
+      return <b>Marriage Counseling</b>;
+    case 'teen_counseling':
+      return <b>Teen Counseling</b>;
+    case 'social_worker':
+      return <b>Social Worker</b>;
+    case 'registered_councillor':
+      return <b>Registered Counsellor</b>;
+    case 'counselling_psychologist':
+      return <b>Counseling Psychologist</b>;
+    case 'clinical_psychologist':
+      return <b>Clinical Psychologist</b>;
+
+    default:
+      return <b />;
+  }
+}
+TherapyType.propTypes = {
+  type: PropTypes.string,
+};
+
 export default function Bookings() {
   const [value, setValue] = React.useState(0);
 
@@ -96,7 +121,7 @@ export default function Bookings() {
     setValue(newValue);
   };
   return (
-    <div className="inner_page p-0">
+    <div className="inner_page p-0 mb-5">
       <div className="inner_head p-3 border-bottom">
         <div className="row m-0 justify-content-between">
           <h3 className="border-0 mb-2 p-0">My Bookings List</h3>
@@ -169,11 +194,18 @@ export default function Bookings() {
         </MenuTabs>
         <TabPanel value={value} index={0}>
           <div className="request_page">
-            {bookings.canceled.map((item) => (
+            {bookings.pending.map((item) => (
               <div key={item.id} className="co-listing">
                 <div className="d-sm-flex">
                   <div className="pro-img">
-                    <img src="assets/img/user.png" alt="Profile" />
+                    <img
+                      src={
+                        item.profile_image
+                          ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
+                          : 'assets/img/user.png'
+                      }
+                      alt="Profile"
+                    />
                   </div>
                   <div className="content_list w-100 pt-3 pt-sm-0 pl-sm-3">
                     <div className="d-sm-flex align-items-center justify-content-between mb-2">
@@ -183,7 +215,7 @@ export default function Bookings() {
                         </h6>
                         <h5 className="mb-2">{`${item.first_name} ${item.last_name}`}</h5>
                         <h6>
-                          <b>{item.therapy_type}</b>
+                          <TherapyType type={item.therapy_type} />
                         </h6>
                       </div>
                       <div className="text-sm-right">
@@ -212,17 +244,177 @@ export default function Bookings() {
                 </div>
               </div>
             ))}
-            <p className="text-center pt-2">No Record Found</p>
+            {!bookings.pending.length ? <p className="text-center pt-2">No Record Found</p> : null}
           </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Confirmed
+          <div className="request_page">
+            {bookings.confirmed.map((item) => (
+              <div key={item.id} className="co-listing">
+                <div className="d-sm-flex">
+                  <div className="pro-img">
+                    <img
+                      src={
+                        item.profile_image
+                          ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
+                          : 'assets/img/user.png'
+                      }
+                      alt="Profile"
+                    />
+                  </div>
+                  <div className="content_list w-100 pt-3 pt-sm-0 pl-sm-3">
+                    <div className="d-sm-flex align-items-center justify-content-between mb-2">
+                      <div>
+                        <h6>
+                          <b>Request:</b> {item.request_number}
+                        </h6>
+                        <h5 className="mb-2">{`${item.first_name} ${item.last_name}`}</h5>
+                        <h6>
+                          <TherapyType type={item.therapy_type} />
+                        </h6>
+                      </div>
+                      <div className="text-sm-right">
+                        <p className="mb-2">
+                          {format(new Date(item.apointment_date_time), 'dd MMM yyyy p')}
+                        </p>
+                        <h4>{`R${item.price}`}</h4>
+                      </div>
+                    </div>
+                    <p className="mb-1">
+                      <span className="readMore">{item.about_me}</span>
+                    </p>
+                    <div className="pt-3">
+                      <a
+                        href={`/my-account/request-detail/${item.id}`}
+                        className="mt-0 btn mr-3 btn-pending">
+                        Detail
+                      </a>
+                      <a
+                        href={`/my-account/edit-request/${item.id}`}
+                        className="btn btn-theme new_edit">
+                        Edit
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {!bookings.confirmed.length ? (
+              <p className="text-center pt-2">No Record Found</p>
+            ) : null}
+          </div>
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Completed
+          <div className="request_page">
+            {bookings.completed.map((item) => (
+              <div key={item.id} className="co-listing">
+                <div className="d-sm-flex">
+                  <div className="pro-img">
+                    <img
+                      src={
+                        item.profile_image
+                          ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
+                          : 'assets/img/user.png'
+                      }
+                      alt="Profile"
+                    />
+                  </div>
+                  <div className="content_list w-100 pt-3 pt-sm-0 pl-sm-3">
+                    <div className="d-sm-flex align-items-center justify-content-between mb-2">
+                      <div>
+                        <h6>
+                          <b>Request:</b> {item.request_number}
+                        </h6>
+                        <h5 className="mb-2">{`${item.first_name} ${item.last_name}`}</h5>
+                        <h6>
+                          <TherapyType type={item.therapy_type} />
+                        </h6>
+                      </div>
+                      <div className="text-sm-right">
+                        <p className="mb-2">
+                          {format(new Date(item.apointment_date_time), 'dd MMM yyyy p')}
+                        </p>
+                        <h4>{`R${item.price}`}</h4>
+                      </div>
+                    </div>
+                    <p className="mb-1">
+                      <span className="readMore">{item.about_me}</span>
+                    </p>
+                    <div className="pt-3">
+                      <a
+                        href={`/my-account/request-detail/${item.id}`}
+                        className="mt-0 btn mr-3 btn-pending">
+                        Detail
+                      </a>
+                      <a
+                        href={`/my-account/edit-request/${item.id}`}
+                        className="btn btn-theme new_edit">
+                        Edit
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {!bookings.completed.length ? (
+              <p className="text-center pt-2">No Record Found</p>
+            ) : null}
+          </div>
         </TabPanel>
         <TabPanel value={value} index={3}>
-          Cancelled
+          <div className="request_page">
+            {bookings.canceled.map((item) => (
+              <div key={item.id} className="co-listing">
+                <div className="d-sm-flex">
+                  <div className="pro-img">
+                    <img
+                      src={
+                        item.profile_image
+                          ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
+                          : 'assets/img/user.png'
+                      }
+                      alt="Profile"
+                    />
+                  </div>
+                  <div className="content_list w-100 pt-3 pt-sm-0 pl-sm-3">
+                    <div className="d-sm-flex align-items-center justify-content-between mb-2">
+                      <div>
+                        <h6>
+                          <b>Request:</b> {item.request_number}
+                        </h6>
+                        <h5 className="mb-2">{`${item.first_name} ${item.last_name}`}</h5>
+                        <h6>
+                          <TherapyType type={item.therapy_type} />
+                        </h6>
+                      </div>
+                      <div className="text-sm-right">
+                        <p className="mb-2">
+                          {format(new Date(item.apointment_date_time), 'dd MMM yyyy p')}
+                        </p>
+                        <h4>{`R${item.price}`}</h4>
+                      </div>
+                    </div>
+                    <p className="mb-1">
+                      <span className="readMore">{item.about_me}</span>
+                    </p>
+                    <div className="pt-3">
+                      <a
+                        href={`/my-account/request-detail/${item.id}`}
+                        className="mt-0 btn mr-3 btn-pending">
+                        Detail
+                      </a>
+                      <a
+                        href={`/my-account/edit-request/${item.id}`}
+                        className="btn btn-theme new_edit">
+                        Edit
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            {!bookings.canceled.length ? <p className="text-center pt-2">No Record Found</p> : null}
+          </div>
         </TabPanel>
       </div>
     </div>

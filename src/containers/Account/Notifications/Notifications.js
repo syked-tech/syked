@@ -39,9 +39,9 @@ export default function Notifications() {
               </div>
             </div>
           </div>
-          <div className="text-center" if="notificationList.length <= '0' && loder_show=='no'">
+          {/* <div className="text-center" if="notificationList.length <= '0' && loder_show=='no'">
             No Notification yet
-          </div>
+          </div> */}
         </div>
       </div>
     </>
