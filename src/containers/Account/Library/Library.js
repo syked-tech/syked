@@ -323,7 +323,7 @@ export default function Library() {
       <div className="inner_page mb-5">
         {match ? (
           <>
-            <h2 className="mb-3  border-bottom other_heading">Communication</h2>
+            <h2 className="mb-3 border-bottom other_heading">Communication</h2>
             <div className="blog-box blog-details">
               <div className="blog-img">
                 <img alt="img" />
@@ -336,7 +336,7 @@ export default function Library() {
           </>
         ) : (
           <>
-            <h2 className="mb-3  border-bottom other_heading">Library</h2>
+            <h2 className="mb-3 border-bottom other_heading">Library</h2>
             <MenuTabs
               indicatorColor="primary"
               variant="scrollable"

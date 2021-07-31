@@ -165,6 +165,12 @@ export default function Routes({ appProps }) {
           />
           <AuthenticatedRoute
             appProps={appProps}
+            component={Dashboard}
+            exact
+            path={ROUTES.EXERCISE_DETAILS_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
             component={SupportGroup}
             exact
             path={ROUTES.SUPPORT_GROUP_PAGE}

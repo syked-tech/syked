@@ -34,6 +34,7 @@ export const LIBRARY_PAGE = '/my-account/library';
 export const LIBRARY_DETAILS_PAGE = '/my-account/library-detail/:id';
 export const REVIEWS_PAGE = '/my-account/reviews';
 export const EXERCISE_PAGE = '/my-account/exercise';
+export const EXERCISE_DETAILS_PAGE = '/my-account/exercise-detail/:id';
 export const SUPPORT_GROUP_PAGE = '/support-group';
 
 export const JWT_NAME = 'jwt';

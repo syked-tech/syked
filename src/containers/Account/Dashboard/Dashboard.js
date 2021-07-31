@@ -81,6 +81,11 @@ function Dashboard() {
       exact: true,
       component: () => <Exercise />,
     },
+    {
+      path: ROUTES.EXERCISE_DETAILS_PAGE,
+      exact: true,
+      component: () => <Exercise />,
+    },
   ];
 
   return (

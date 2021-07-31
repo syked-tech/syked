@@ -76,6 +76,7 @@ export default function Header({ isAuthenticated = false }) {
     ROUTES.ASSESMENT_PAGE,
     ROUTES.LIBRARY_PAGE,
     `${ROUTES.LIBRARY_PAGE}-detail/${id}`,
+    `${ROUTES.EXERCISE_PAGE}-detail/${id}`,
     ROUTES.EDIT_BANK_INFO_PAGE,
     ROUTES.EXERCISE_PAGE,
   ].includes(pathname);
