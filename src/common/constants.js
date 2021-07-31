@@ -31,6 +31,7 @@ export const DIARY_PAGE = '/my-account/notes-list';
 export const NOTIFICATION_PAGE = '/my-account/notification-list';
 export const ASSESMENT_PAGE = '/my-account/assessment';
 export const LIBRARY_PAGE = '/my-account/library';
+export const LIBRARY_DETAILS_PAGE = '/my-account/library-detail/:id';
 export const REVIEWS_PAGE = '/my-account/reviews';
 export const EXERCISE_PAGE = '/my-account/exercise';
 export const SUPPORT_GROUP_PAGE = '/support-group';

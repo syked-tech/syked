@@ -72,6 +72,11 @@ function Dashboard() {
       component: () => <Library />,
     },
     {
+      path: ROUTES.LIBRARY_DETAILS_PAGE,
+      exact: true,
+      component: () => <Library />,
+    },
+    {
       path: ROUTES.EXERCISE_PAGE,
       exact: true,
       component: () => <Exercise />,

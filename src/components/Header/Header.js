@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useParams } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -47,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Header({ isAuthenticated = false }) {
   const classes = useStyles();
   const { pathname } = useLocation();
+  const { id } = useParams();
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 20,
@@ -74,6 +75,7 @@ export default function Header({ isAuthenticated = false }) {
     ROUTES.DIARY_PAGE,
     ROUTES.ASSESMENT_PAGE,
     ROUTES.LIBRARY_PAGE,
+    `${ROUTES.LIBRARY_PAGE}-detail/${id}`,
     ROUTES.EDIT_BANK_INFO_PAGE,
     ROUTES.EXERCISE_PAGE,
   ].includes(pathname);

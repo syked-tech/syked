@@ -149,6 +149,12 @@ export default function Routes({ appProps }) {
             appProps={appProps}
             component={Dashboard}
             exact
+            path={ROUTES.LIBRARY_DETAILS_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={Dashboard}
+            exact
             path={ROUTES.EDIT_BANK_INFO_PAGE}
           />
           <AuthenticatedRoute
