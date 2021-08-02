@@ -15,6 +15,7 @@ export default function Diary() {
   };
 
   const onSubmit = (values) => {
+    // eslint-disable-next-line no-console
     console.log(values);
     setShow(false);
   };
