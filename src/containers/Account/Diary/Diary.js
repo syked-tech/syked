@@ -97,7 +97,7 @@ export default function Diary() {
               </button>
             </h5>
           </div>
-          <div className="" if="notesData.length > '0'">
+          <div>
             <div className="co-listing" if="let notesItem of notesData">
               <div className="content_list border-bottom w-100 pb-2 mb-2">
                 <div className="d-sm-flex align-items-center justify-content-between mb-2">
