@@ -44,7 +44,7 @@ const MenuList = ({ userType }) => {
           <li has="customer">
             <NavLink to={ROUTES.NOTIFICATION_PAGE} activeClassName="active">
               <FontAwesomeIcon icon={faBell} /> Notification List
-              <span className="count chat_count">1</span>
+              {/* <span className="count chat_count">1</span> */}
             </NavLink>
           </li>
           <li has="customer">

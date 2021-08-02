@@ -1,7 +1,7 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faTrash } from '@fortawesome/free-solid-svg-icons';
+// import { Link } from 'react-router-dom';
 
 export default function Notifications() {
   return (
@@ -15,7 +15,7 @@ export default function Notifications() {
             <h3>Notification List</h3>
           </div>
 
-          <div className="" if="notificationList.length>'0'">
+          {/* <div >
             <div className="co-listing" if="let notification_list of notificationList;">
               <div className="content_list border-bottom w-100 pb-2 mb-2">
                 <div className="d-sm-flex align-items-center justify-content-between mb-2">
@@ -38,10 +38,10 @@ export default function Notifications() {
                 </div>
               </div>
             </div>
-          </div>
-          {/* <div className="text-center" if="notificationList.length <= '0' && loder_show=='no'">
-            No Notification yet
           </div> */}
+          <div className="text-center" if="notificationList.length <= '0' && loder_show=='no'">
+            No Notification yet
+          </div>
         </div>
       </div>
     </>
