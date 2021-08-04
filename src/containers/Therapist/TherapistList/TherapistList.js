@@ -153,14 +153,7 @@ function TherapistList({ getTherapistsByScore }) {
                     max={5}
                   />
                 </p>
-                {/*
-                <rating [(ngModel)]="reviewList.rating"
-                [readonly]="true"
-                [float]="true"
-                >
-                </rating>
-              </p> */}
-                <p className="mb-0">review</p>
+                <p className="mb-0">Reviews here</p>
               </div>
             </div>
             <div className="p-3" if="reviews_list.length <= '0'">
