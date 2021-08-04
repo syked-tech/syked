@@ -26,9 +26,9 @@ export function* signIn(actions) {
     const authResponse = yield call(axios, options);
     if (authResponse?.data?.data?.AuthenticationResult?.IdToken) {
       const token = authResponse?.data?.data?.AuthenticationResult?.IdToken;
-      const { exp } = JSON.parse(atob(token.split('.')[1]));
-      const expires = new Date(exp * 1000);
-      yield cookies.set(CONSTANTS.JWT_NAME, token, { path: '/', expires });
+      // const { exp } = JSON.parse(atob(token.split('.')[1]));
+      // const expires = new Date(exp * 1000);
+      yield cookies.set(CONSTANTS.JWT_NAME, token, { path: '/' });
       yield put(AuthSlice.signInSuccess(authResponse?.data?.data));
       yield put(push(CONSTANTS.DASHBOARD_PAGE));
       yield put(

@@ -1,8 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { useParams, Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
+import { withStyles } from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { format } from 'date-fns';
 import { selectIsAuthenticated } from 'containers/Auth/authSlice';
 import {
   // selectPreferredTherapists,
@@ -93,7 +98,16 @@ const therapists = [
   },
 ];
 
+const RatingIcon = withStyles(() => ({
+  root: {
+    color: '#bac866',
+  },
+  sizeLarge: {
+    fontSize: 50,
+  },
+}))(Rating);
 function TherapistList({ getTherapistsByScore }) {
+  const [show, setShow] = useState(false);
   const { score } = useParams();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   // const therapists = useSelector(selectPreferredTherapists);
@@ -102,9 +116,62 @@ function TherapistList({ getTherapistsByScore }) {
     getTherapistsByScore({ score });
   }, [getTherapistsByScore]);
 
+  const handleClose = () => {
+    setShow(false);
+  };
+  // eslint-disable-next-line no-unused-vars
+  const openReview = (id) => {
+    // TODO: https://api.syked.co.za/therapist/counselor-detail?id=kCtcpVcCm
+    setShow(true);
+  };
+
   return (
     <>
       <Header isAuthenticated={isAuthenticated} />
+      <Modal backdrop="static" keyboard={false} show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <h4 className="modal-title pull-left">Review</h4>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="bg-white box-shadow">
+            <div className="pb-3" if="reviews_list.length > '0'">
+              <div
+                className="patient_list border-bottom pb-2 pt-2"
+                if="let reviewList of reviews_list;">
+                <div className="d-sm-flex mb-0 align-items-center justify-content-between">
+                  <h5 className="mb-0">first_name</h5>
+                  <span>{format(new Date(), 'dd MMM yyyy p')}</span>
+                </div>
+                <p className="mb-0">
+                  <RatingIcon
+                    emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                    size="large"
+                    readOnly
+                    defaultValue={3}
+                    max={5}
+                  />
+                </p>
+                {/*
+                <rating [(ngModel)]="reviewList.rating"
+                [readonly]="true"
+                [float]="true"
+                >
+                </rating>
+              </p> */}
+                <p className="mb-0">review</p>
+              </div>
+            </div>
+            <div className="p-3" if="reviews_list.length <= '0'">
+              <div className="patient_list ">
+                <p className="text-center mb-0">No Review Yet</p>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+
       <div className="wrapper inner_wrap">
         <section className="f7-gray consul-section pb-5" style={{ paddingTop: 140 }}>
           {/* <div className="loader" if="therapistList.length <= '0' && loder_show=='yes' ">
@@ -152,7 +219,10 @@ function TherapistList({ getTherapistsByScore }) {
                               className="btn btn-green mr-2">
                               Continue
                             </Link>
-                            <button type="button" className="btn btn-green">
+                            <button
+                              onClick={() => openReview(item.unic_id)}
+                              type="button"
+                              className="btn btn-green">
                               View Reviews
                             </button>
                           </div>

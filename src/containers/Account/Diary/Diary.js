@@ -9,7 +9,7 @@ import DateTimePickerAdapter from 'components/DateTimePickerAdapter';
 import { format } from 'date-fns';
 
 export default function Diary() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const handleClose = () => {
     setShow(false);
   };
