@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/syked/static/css/main.f4a92d27.chunk.css",
+    "main.js": "/syked/static/js/main.84980f86.chunk.js",
+    "main.js.map": "/syked/static/js/main.84980f86.chunk.js.map",
+    "runtime-main.js": "/syked/static/js/runtime-main.0f60f2bb.js",
+    "runtime-main.js.map": "/syked/static/js/runtime-main.0f60f2bb.js.map",
+    "static/css/2.a6930025.chunk.css": "/syked/static/css/2.a6930025.chunk.css",
+    "static/js/2.4fa20cc6.chunk.js": "/syked/static/js/2.4fa20cc6.chunk.js",
+    "static/js/2.4fa20cc6.chunk.js.map": "/syked/static/js/2.4fa20cc6.chunk.js.map",
+    "index.html": "/syked/index.html",
+    "static/css/2.a6930025.chunk.css.map": "/syked/static/css/2.a6930025.chunk.css.map",
+    "static/css/main.f4a92d27.chunk.css.map": "/syked/static/css/main.f4a92d27.chunk.css.map",
+    "static/js/2.4fa20cc6.chunk.js.LICENSE.txt": "/syked/static/js/2.4fa20cc6.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/syked/static/media/AvenirLTStd-Roman.ce9439da.svg",
+    "static/media/Order.scss": "/syked/static/media/be_happy_bg.5071d53a.jpg",
+    "static/media/booking_bg.d9425ce7.jpg": "/syked/static/media/booking_bg.d9425ce7.jpg",
+    "static/media/btn_google_light_normal_ios.359b7cd3.svg": "/syked/static/media/btn_google_light_normal_ios.359b7cd3.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0f60f2bb.js",
+    "static/css/2.a6930025.chunk.css",
+    "static/js/2.4fa20cc6.chunk.js",
+    "static/css/main.f4a92d27.chunk.css",
+    "static/js/main.84980f86.chunk.js"
+  ]
+}
