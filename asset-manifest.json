@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/syked/static/css/main.f4a92d27.chunk.css",
-    "main.js": "/syked/static/js/main.84980f86.chunk.js",
-    "main.js.map": "/syked/static/js/main.84980f86.chunk.js.map",
+    "main.js": "/syked/static/js/main.5ad6f0b9.chunk.js",
+    "main.js.map": "/syked/static/js/main.5ad6f0b9.chunk.js.map",
     "runtime-main.js": "/syked/static/js/runtime-main.0f60f2bb.js",
     "runtime-main.js.map": "/syked/static/js/runtime-main.0f60f2bb.js.map",
     "static/css/2.a6930025.chunk.css": "/syked/static/css/2.a6930025.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.a6930025.chunk.css",
     "static/js/2.4fa20cc6.chunk.js",
     "static/css/main.f4a92d27.chunk.css",
-    "static/js/main.84980f86.chunk.js"
+    "static/js/main.5ad6f0b9.chunk.js"
   ]
 }
