@@ -51,16 +51,16 @@ export default function SupportGroup() {
                             <img
                               if="chat.users_master.profile_image != '' && chat.users_master.user_type == 'customer'"
                               alt="profile"
-                              src="assets/img/user.png"
+                              src="syked/assets/img/user.png"
                             />
                             <img
                               if="chat.users_master.profile_image != '' && chat.users_master.user_type == 'therapist'"
                               alt="profile"
-                              src="assets/img/user.png"
+                              src="syked/assets/img/user.png"
                             />
                             <img
                               if="chat.users_master.profile_image == ''"
-                              src="assets/img/user.png"
+                              src="syked/assets/img/user.png"
                               alt="profile"
                             />
                           </div>

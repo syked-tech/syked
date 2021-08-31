@@ -67,7 +67,7 @@ function MobileVerification({ resetError, mobileVerify }) {
 
       {loading ? (
         <div className="loader">
-          <img src="assets/img/loader.svg" alt="loader" />
+          <img src="syked/assets/img/loader.svg" alt="loader" />
         </div>
       ) : null}
       <section className="login">
@@ -231,7 +231,7 @@ function MobileVerification({ resetError, mobileVerify }) {
           </div>
         </div>
         <div className="login_right">
-          <img src="assets/img/sing_up.png" alt="Verification" />
+          <img src="syked/assets/img/sing_up.png" alt="Verification" />
         </div>
       </section>
       <Footer />

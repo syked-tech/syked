@@ -318,7 +318,7 @@ export default function Library() {
   return (
     <>
       {/* <div className="loader">
-        <img src="assets/img/loader.svg" alt="loader" />
+        <img src="syked/assets/img/loader.svg" alt="loader" />
       </div> */}
       <div className="inner_page mb-5">
         {match ? (

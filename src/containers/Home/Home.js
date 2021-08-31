@@ -51,7 +51,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <img src="assets/img/banner.png" alt="Banner" />
+            <img src="syked/assets/img/banner.png" alt="Banner" />
           </div>
           <div className="banner_section">
             <div className="banner">
@@ -63,7 +63,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <img src="assets/img/banner_2.png" alt="Banner" />
+            <img src="syked/assets/img/banner_2.png" alt="Banner" />
           </div>
           <div className="banner_section">
             <div className="banner">
@@ -75,7 +75,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <img src="assets/img/banner_3.png" alt="Banner" />
+            <img src="syked/assets/img/banner_3.png" alt="Banner" />
           </div>
         </div>
 
@@ -84,7 +84,7 @@ export default function Home() {
             <Grid item xs={12} sm={6} md={3}>
               <div className="green_three user">
                 <div>
-                  <img src="assets/img/teens.png" alt="Teens" />
+                  <img src="syked/assets/img/teens.png" alt="Teens" />
                 </div>
                 <div>
                   <h2>Students</h2>
@@ -97,7 +97,7 @@ export default function Home() {
             <Grid item xs={12} sm={6} md={3}>
               <div className="green_one user">
                 <div>
-                  <img src="assets/img/individuals.png" alt="Individual" />
+                  <img src="syked/assets/img/individuals.png" alt="Individual" />
                 </div>
                 <div>
                   <h2>Employee</h2>
@@ -110,7 +110,7 @@ export default function Home() {
             <Grid item xs={12} sm={6} md={3}>
               <div className="green_three user">
                 <div>
-                  <img src="assets/img/gernal-public.png" alt="Public" />
+                  <img src="syked/assets/img/gernal-public.png" alt="Public" />
                 </div>
                 <div>
                   <h2>General Public</h2>

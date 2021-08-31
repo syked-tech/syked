@@ -24,7 +24,7 @@ export default function HowItWorks() {
             <Grid container justify="center" spacing={3}>
               <Grid item xs={6}>
                 <div className="text-center col wow rollIn">
-                  <img src="assets/img/how_it_1.png" alt="How it works" />
+                  <img src="syked/assets/img/how_it_1.png" alt="How it works" />
                 </div>
               </Grid>
               <Grid item xs={6}>
@@ -54,7 +54,7 @@ export default function HowItWorks() {
               </Grid>
               <Grid item xs={6}>
                 <div className="text-center col wow rollIn">
-                  <img src="assets/img/how_it_2.png" alt="How it works" />
+                  <img src="syked/assets/img/how_it_2.png" alt="How it works" />
                 </div>
               </Grid>
             </Grid>
@@ -66,7 +66,7 @@ export default function HowItWorks() {
         <Container>
           <Grid container justify="center" alignItems="center">
             <Grid item xs={12} md={4} lg={4}>
-              <img className="user_img" src="assets/img/new_smill.png" alt="Smile" />
+              <img className="user_img" src="syked/assets/img/new_smill.png" alt="Smile" />
             </Grid>
             <Grid item xs={12} md={4} lg={4}>
               <h4>Your well being is our main theme</h4>
@@ -76,7 +76,7 @@ export default function HowItWorks() {
               </p>
             </Grid>
             <Grid item xs={12} md={4} lg={4}>
-              <img className="stamp_img" src="assets/img/happiness.png" alt="Smile" />
+              <img className="stamp_img" src="syked/assets/img/happiness.png" alt="Smile" />
             </Grid>
           </Grid>
         </Container>

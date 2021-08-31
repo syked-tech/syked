@@ -38,7 +38,7 @@ function ForgotPassword({ forgotPassword, resetError }) {
 
       {loading ? (
         <div className="loader">
-          <img src="assets/img/loader.svg" alt="loader" />
+          <img src="syked/assets/img/loader.svg" alt="loader" />
         </div>
       ) : null}
 
@@ -99,7 +99,7 @@ function ForgotPassword({ forgotPassword, resetError }) {
           </div>
         </div>
         <div className="login_right">
-          <img src="assets/img/sing_up.png" alt="forgot password" />
+          <img src="syked/assets/img/sing_up.png" alt="forgot password" />
         </div>
       </section>
 

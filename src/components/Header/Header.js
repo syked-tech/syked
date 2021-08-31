@@ -102,13 +102,13 @@ export default function Header({ isAuthenticated = false }) {
                         {trigger ? (
                           <img
                             className={classes.navbarBrandLogo}
-                            src="assets/img/white_logo.png"
+                            src="syked/assets/img/white_logo.png"
                             alt="Logo"
                           />
                         ) : (
                           <img
                             className={classes.navbarBrandLogo}
-                            src="assets/img/logo.png"
+                            src="syked/assets/img/logo.png"
                             alt="Logo"
                           />
                         )}

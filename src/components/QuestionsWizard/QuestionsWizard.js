@@ -83,7 +83,7 @@ export default class Wizard extends React.Component {
             </div>
             <div className="booking_msg mt-3">
               <div className="msg">
-                <img src="assets/img/th_pro_img.png" alt="pro" />
+                <img src="syked/assets/img/th_pro_img.png" alt="pro" />
               </div>
               <p>
                 Hi, I’ll be guiding you through this quick assessment that will help me pair you

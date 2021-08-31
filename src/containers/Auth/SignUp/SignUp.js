@@ -94,7 +94,7 @@ function SignUp({ signUp, socialLogin, resetError, userEmail }) {
 
       {loading || loadingSocial ? (
         <div className="loader">
-          <img src="assets/img/loader.svg" alt="loader" />
+          <img src="syked/assets/img/loader.svg" alt="loader" />
         </div>
       ) : null}
 
@@ -382,7 +382,7 @@ function SignUp({ signUp, socialLogin, resetError, userEmail }) {
           </div>
         </div>
         <div className="login_right">
-          <img src="assets/img/sing_up.png" alt="SignUp" />
+          <img src="syked/assets/img/sing_up.png" alt="SignUp" />
         </div>
       </section>
       <Footer />

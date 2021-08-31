@@ -21,7 +21,7 @@ export default function EditProfile() {
             <div className="pro_img">
               <label>
                 <FontAwesomeIcon icon={faPencilAlt} />
-                <img src="assets/img/user.png" alt="Profile" />
+                <img src="syked/assets/img/user.png" alt="Profile" />
                 <input type="file" name="image" />
               </label>
             </div>

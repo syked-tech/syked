@@ -45,7 +45,7 @@ export default function Profile() {
           </div>
           <div className="d-sm-flex">
             <div className="pro_img">
-              <img src="assets/img/user.png" alt="Profile" />
+              <img src="syked/assets/img/user.png" alt="Profile" />
             </div>
             <div className="pr-d w-md-100 row mb-0">
               <div className="mb-3 col-md-6">
@@ -127,7 +127,7 @@ export default function Profile() {
                   </TumblrShareButton>
                   <VKShareButton
                     url="https://syked.co.za/web"
-                    image="assets/img/syked-logo-200.png">
+                    image="syked/assets/img/syked-logo-200.png">
                     <VKIcon size={38} />
                   </VKShareButton>
                   <TelegramShareButton

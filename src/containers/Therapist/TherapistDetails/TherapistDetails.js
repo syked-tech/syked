@@ -220,7 +220,7 @@ function TherapistDetails({ getTherapist, getSchedule }) {
             <div className="col-md-4">
               <div className="bg-white pro_box p-3">
                 <div className="pro-img">
-                  <img src="assets/img/user.png" alt="profile" />
+                  <img src="syked/assets/img/user.png" alt="profile" />
                 </div>
                 <div className="text-center border-bottom">
                   <h5 if="userInfo?.first_name !== ''">Mohube Maswi</h5>

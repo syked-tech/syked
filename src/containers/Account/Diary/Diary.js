@@ -23,7 +23,7 @@ export default function Diary() {
   return (
     <>
       {/* <div className="loader" if="loder_show == 'yes'">
-        <img src="assets/img/loader.svg" alt="Loader" />
+        <img src="syked/assets/img/loader.svg" alt="Loader" />
       </div> */}
 
       <Modal backdrop="static" keyboard={false} show={show} onHide={handleClose}>

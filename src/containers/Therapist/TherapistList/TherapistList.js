@@ -168,7 +168,7 @@ function TherapistList({ getTherapistsByScore }) {
       <div className="wrapper inner_wrap">
         <section className="f7-gray consul-section pb-5" style={{ paddingTop: 140 }}>
           {/* <div className="loader" if="therapistList.length <= '0' && loder_show=='yes' ">
-            <img src="assets/img/loader.svg" alt="loader" />
+            <img src="syked/assets/img/loader.svg" alt="loader" />
           </div> */}
           <div className="container">
             <div className="row">
@@ -187,7 +187,7 @@ function TherapistList({ getTherapistsByScore }) {
                     if="let therapist_list of therapistList;">
                     <div className="d-sm-flex align-items-md-center">
                       <div className="pro-img">
-                        <img src="assets/img/user.png" alt="profile" />
+                        <img src="syked/assets/img/user.png" alt="profile" />
                       </div>
                       <div className="content_list w-100 pt-3 pt-sm-0 pl-sm-3">
                         <div className="d-sm-flex align-items-center justify-content-between mb-2">

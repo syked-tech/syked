@@ -14,7 +14,7 @@ export default function Footer() {
         <Grid container justify="center" spacing={3}>
           <Grid item xs={12} sm={6} lg={3}>
             <a href="#0" className="mb-2 d-block f-logo">
-              <img src="assets/img/logo.png" alt="Logo" />
+              <img src="syked/assets/img/logo.png" alt="Logo" />
             </a>
             <p>
               If you’re in a life threatening situation- refrain from using this platform call the{' '}

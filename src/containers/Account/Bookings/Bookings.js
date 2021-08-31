@@ -202,7 +202,7 @@ export default function Bookings() {
                       src={
                         item.profile_image
                           ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
-                          : 'assets/img/user.png'
+                          : 'syked/assets/img/user.png'
                       }
                       alt="Profile"
                     />
@@ -257,7 +257,7 @@ export default function Bookings() {
                       src={
                         item.profile_image
                           ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
-                          : 'assets/img/user.png'
+                          : 'syked/assets/img/user.png'
                       }
                       alt="Profile"
                     />
@@ -314,7 +314,7 @@ export default function Bookings() {
                       src={
                         item.profile_image
                           ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
-                          : 'assets/img/user.png'
+                          : 'syked/assets/img/user.png'
                       }
                       alt="Profile"
                     />
@@ -371,7 +371,7 @@ export default function Bookings() {
                       src={
                         item.profile_image
                           ? `https://syked.co.za/public/uploads/user/therapist/${item.profile_image}`
-                          : 'assets/img/user.png'
+                          : 'syked/assets/img/user.png'
                       }
                       alt="Profile"
                     />

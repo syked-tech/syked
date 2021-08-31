@@ -34,7 +34,7 @@ function Contact({ contactUs, resetError }) {
 
       {loading ? (
         <div className="loader">
-          <img src="assets/img/loader.svg" alt="loader" />
+          <img src="syked/assets/img/loader.svg" alt="loader" />
         </div>
       ) : null}
 
@@ -171,7 +171,7 @@ function Contact({ contactUs, resetError }) {
           </div>
         </div>
         <div className="login_right">
-          <img src="assets/img/sing_up.png" alt="Login" />
+          <img src="syked/assets/img/sing_up.png" alt="Login" />
         </div>
       </section>
       <Footer />

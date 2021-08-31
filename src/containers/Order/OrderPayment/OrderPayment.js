@@ -122,7 +122,7 @@ export default function OrderPayment() {
               <div className="my_request p-3 mb-4">
                 <div className="d-sm-flex pt-3">
                   <div className="pro-img">
-                    <img src="assets/img/user.png" alt="profile" />
+                    <img src="syked/assets/img/user.png" alt="profile" />
                   </div>
                   <div className="pt-3 pt-sm-0 pl-sm-4 w-100">
                     <div className="d-sm-flex align-items-center justify-content-between">

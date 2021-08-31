@@ -153,7 +153,7 @@ function Testimonials({ getReviews }) {
           <Grid container>
             <Grid item xs={12} sm={6} md={6}>
               <div className="video videoHome">
-                <img src="assets/img/video_banner.png" alt="" />
+                <img src="syked/assets/img/video_banner.png" alt="" />
               </div>
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
@@ -203,7 +203,7 @@ function Testimonials({ getReviews }) {
                   <div key={item.link} className="p-3">
                     <div className="icon_hiw logo">
                       <a href={`${item.link}`} target="_blank">
-                        <img src={`assets/img/${item.image}`} alt="Logo" />
+                        <img src={`syked/assets/img/${item.image}`} alt="Logo" />
                       </a>
                     </div>
                   </div>
