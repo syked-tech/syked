@@ -1,4 +1,4 @@
-export const ROOT = '/';
+export const ROOT = '/syked';
 export const CONTACT_PAGE = '/contact';
 export const LOGIN_PAGE = '/login';
 export const SIGN_UP_PAGE = '/sign-up';
