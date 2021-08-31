@@ -21,7 +21,9 @@ import Questions from 'containers/Questions';
 import SupportGroup from 'containers/SupportGroup';
 import TherapistList from 'containers/Therapist/TherapistList';
 import TherapistDetails from 'containers/Therapist/TherapistDetails';
-import Order from 'containers/Order';
+import OrderPayment from 'containers/Order/OrderPayment';
+import OrderSucces from 'containers/Order/OrderSucces';
+import OrderCancel from 'containers/Order/OrderCancel';
 import Terms from 'containers/Terms';
 import Privacy from 'containers/Privacy';
 import FAQ from 'containers/FAQ';
@@ -177,9 +179,21 @@ export default function Routes({ appProps }) {
           />
           <AuthenticatedRoute
             appProps={appProps}
-            component={Order}
+            component={OrderPayment}
             exact
-            path={ROUTES.THERAPIST_ORDER_PAGE}
+            path={ROUTES.ORDER_PAYMENT_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={OrderSucces}
+            exact
+            path={ROUTES.ORDER_SUCCESS_PAGE}
+          />
+          <AuthenticatedRoute
+            appProps={appProps}
+            component={OrderCancel}
+            exact
+            path={ROUTES.ORDER_CANCEL_PAGE}
           />
           <Route component={NotFound} />
         </Switch>

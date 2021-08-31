@@ -11,8 +11,10 @@ export const FAQ_PAGE = '/faq';
 export const QUESTIONS_PAGE = '/questions';
 export const THERAPIST_LIST_PAGE = '/therapist/list/:score';
 export const THERAPIST_DETAILS_PAGE = '/therapist/detail/:id';
-export const THERAPIST_ORDER_PAGE = '/order';
-export const ORDER_SUCCESS_PAGE = '/order/success/20210725100';
+export const ORDER_PAYMENT_PAGE = '/order';
+export const ORDER_SUCCESS_PAGE = '/order/success/:ordernumber';
+export const ORDER_CANCEL_PAGE = '/order/cancel/:ordernumber';
+export const ORDER_NOTIFY_PAGE = '/order/notify/:ordernumber';
 export const DISCLAIMER_PAGE = '/disclaimer';
 
 // My Account
